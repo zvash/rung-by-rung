@@ -57,6 +57,7 @@ assets/js/app.js           shell: hash router, nav, language/theme/"my level", s
 assets/js/data/*.js        all content, as bilingual pairs
 assets/js/views/*.js       one view per page: S.views.<route> = { render, onParam, search }
 tools/validate.js          checks the bilingual data files
+tools/build.js             refreshes asset URLs with a shared release UUID
 ```
 
 Content strings are pairs: `L("English", "فارسی")`. Inline markup: `**bold**`, `==highlight==`, `` `code` ``, `{L4}` for a level chip, `[label](#/route)` and `[label](https://…)` for links; a blank line starts a paragraph, `- ` a bullet, `1. ` a numbered item. Raw HTML is escaped.
@@ -68,6 +69,14 @@ Check a file after editing it (from this folder):
 ```bash
 node tools/validate.js data/faq-b.js
 ```
+
+Before publishing CSS or JavaScript changes, run from this folder (Node.js required):
+
+```bash
+node tools/build.js
+```
+
+Each run generates a new UUID and updates every local stylesheet and script URL in `index.html` with the same `?v=` value. It replaces existing versions and includes newly added asset references. Commit the updated `index.html` along with your changes, then push to GitHub Pages. The script works from any directory when invoked by its path; no dependencies need installing.
 
 To add things:
 
