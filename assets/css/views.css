@@ -473,6 +473,7 @@ html[dir="rtl"] blockquote.script { border-radius: 12px 0 0 12px; }
 .scen-state + .ic.chev { margin-inline-start: 0 !important; }
 .scen-setup { font-size: 1.02rem; line-height: 1.75; }
 .scen-q { font-weight: 750; margin: 14px 0 12px; }
+.scen > .acc-body > .btn-row { margin-top: 14px; }
 .opt-list { display: grid; gap: 10px; margin-bottom: 14px; }
 .opt-btn { display: flex; gap: 14px; align-items: flex-start; text-align: start; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); cursor: pointer; font-size: .96rem; line-height: 1.6; transition: border-color .12s, background .12s; }
 .opt-btn:hover { border-color: var(--brand); background: color-mix(in srgb, var(--brand-soft) 50%, var(--surface)); }

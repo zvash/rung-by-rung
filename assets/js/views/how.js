@@ -59,14 +59,14 @@
     return '<p class="muted">' + md(H.e2e.intro) + "</p>" +
       U.seg("e2e-kind", H.e2e.kinds.map(function (k) { return { id: k.id, label: k.name }; }), H.e2e.kinds[0].id, S.plain(L("Kind of work", "نوع کار"))) +
       '<div id="e2eBody" class="e2e">' + e2eBody(H.e2e.kinds[0].id, []) + "</div>" +
-      U.callout("tip", L("Owning, in the ladder's sense", "own کردن، به معنای نردبان"),
+      U.callout("tip", L("Owning, in the ladder's sense", "معنای own کردن در نردبان"),
         L("If a gap shows up in something you own, you fix it yourself or find and involve the right people and follow up until it is solved, whether or not you wrote that part. “My job was only the code” is not an answer at L4 and above.",
-          "اگر در کاری که own کرده‌اید شکافی پیدا شد، خودتان رفعش می‌کنید یا آدم‌های درست را پیدا و درگیر می‌کنید و تا حل شدن پی‌گیری می‌کنید، چه آن بخش را خودتان نوشته باشید چه نه. «کار من فقط کد بود» از L4 به بالا جواب نیست."));
+          "اگر در کاری که own کرده‌اید مشکلی پیدا شود، برای رفع آن اقدام می‌کنید. یا خودتان آن را حل می‌کنید یا افراد لازم را درگیر می‌کنید و تا حل مساله پیگیری می‌کنید، حتی اگر آن بخش را خودتان ننوشته باشید. از L4 به بالا، «کار من فقط نوشتن کد بود» پاسخ قابل‌قبولی نیست."));
   }
   function sectionLenses() {
     return U.tabs("lenses", [
       { id: "explorer", icon: "layers", label: L("The five questions", "پنج پرسش"), html: lensExplorer() },
-      { id: "matrix", icon: "mountain", label: L("Hard problem, simple answer", "مساله‌ی سخت، پاسخ ساده"), html: matrixHtml() },
+      { id: "matrix", icon: "mountain", label: L("Hard problem, simple answer", "مساله‌ی سخت، راه‌حل ساده"), html: matrixHtml() },
       { id: "e2e", icon: "check", label: L("End to end, in practice", "end-to-end در عمل"), html: e2eHtml() }
     ], "explorer");
   }
@@ -77,7 +77,7 @@
     { id: "autonomy", icon: "compass", label: L("Autonomy", "استقلال") },
     { id: "ambiguity", icon: "mountain", label: L("Ambiguity", "ابهام") },
     { id: "horizon", icon: "clock", label: L("Time horizon", "افق زمانی") },
-    { id: "people", icon: "users", label: L("People you move", "افرادی که جلو می‌برید") }
+    { id: "people", icon: "users", label: L("People you move", "افرادی که هدایت می‌کنید") }
   ];
   function ringsSvg(sel) {
     var R = [30, 56, 82, 108, 134, 160], cx = 170, cy = 170, svg = '<svg class="rings" viewBox="0 0 340 340" role="img" aria-label="' + esc(S.plain(L("Concentric rings: scope grows with each level", "حلقه‌های هم‌مرکز: scope با هر سطح بزرگ‌تر می‌شود"))) + '" style="direction:ltr">';
@@ -115,7 +115,7 @@
       return [S.lv(id) + " " + md(S.levelById(id).name)].concat(T.companies.map(function (c) { return esc(T.rows[id][c.id]); }));
     });
     var h = '<div class="tr-pick"><label>' + md(L("Your employer", "کارفرمای شما")) + '<select id="trCo" class="sel">' + T.companies.map(function (c) { return '<option value="' + c.id + '">' + esc(c.name) + "</option>"; }).join("") +
-      '</select></label><label>' + md(L("Your level there", "سطح شما آن‌جا")) + '<select id="trLv" class="sel"></select></label><div id="trOut" class="tr-out"></div></div>';
+      '</select></label><label>' + md(L("Your level there", "سطح شما در آن شرکت")) + '<select id="trLv" class="sel"></select></label><div id="trOut" class="tr-out"></div></div>';
     h += '<div id="trTable">' + U.table(head, rows, { cls: "tr-table", rowAttrs: function (r, i) { return 'data-lv="' + S.LEVELS[i] + '"' + (sel === S.LEVELS[i] ? ' class="is-me"' : ""); } }) + "</div>";
     h += '<p class="legend"><span class="cdot c-H"></span>' + md(CONF.H.label) + ' <span class="cdot c-M"></span>' + md(CONF.M.label) + ' <span class="cdot c-L"></span>' + md(CONF.L.label) + "</p>";
     h += '<ul class="cautions">' + T.cautions.map(function (c) { return "<li>" + md(c) + "</li>"; }).join("") + "</ul>" + U.source(T.source);
@@ -123,7 +123,7 @@
   }
   function vocabHtml() {
     var rows = H.vocab.map(function (v) { return [esc(v.who) + "<br>" + confTag(v.conf), md(v.names), md(v.note)]; });
-    return U.table([md(L("Employer or ladder", "کارفرما یا نردبان")), md(L("What they judge, in their words", "چه چیزی را می‌سنجند، به زبان خودشان")), md(L("Worth noticing", "قابل‌توجه"))], rows, { cls: "vocab-table" }) +
+    return U.table([md(L("Employer or ladder", "کارفرما یا نردبان")), md(L("What they judge, in their words", "چه چیزی را می‌سنجند، به زبان خودشان")), md(L("Worth noticing", "نکته‌ی قابل توجه"))], rows, { cls: "vocab-table" }) +
       U.callout("note", null, H.vocabNote);
   }
   function sectionTranslator() {
@@ -141,14 +141,14 @@
     }).join("") + "</ol>";
     h += U.callout("rule", L("Write for a reader who doesn't know you", "برای خواننده‌ای بنویسید که شما را نمی‌شناسد"),
       L("The people who decide are often not the people who worked with you. A case wins when it is easy to quote: the problem, your role, the result, what persists. “We” loses to a sentence someone else can repeat in the room.",
-        "کسانی که تصمیم می‌گیرند اغلب همان کسانی نیستند که با شما کار کرده‌اند. پرونده‌ای می‌برد که نقل‌کردنش آسان باشد: مساله، نقش شما، نتیجه، آنچه می‌ماند. «ما» به جمله‌ای می‌بازد که یک نفر دیگر بتواند در اتاق تکرارش کند."));
+        "تصمیم‌گیرندگان اغلب کسانی‌اند که با شما کار نکرده‌اند. پرونده‌ای بهتر پیش می‌رود که بتوان به آن استناد کرد: مساله، نقش شما، نتیجه و اثر ماندگار. توضیح مبهم با «ما» از جمله‌ای ضعیف‌تر است که فرد دیگری بتواند در جلسه‌ی ارزیابی تکرار کند."));
     h += '<div class="why-not"><h3>' + md(L("Why a case comes back “not yet”", "چرا پرونده با «هنوز نه» برمی‌گردد")) + '</h3><div class="grid c3">' +
       [
-        { t: L("The scope wasn't there yet", "scope هنوز نبود"), x: L("Real work at the current level, not yet at the next.", "کار واقعی در سطح فعلی، ولی هنوز نه در سطح بعد.") },
-        { t: L("The evidence wasn't quotable", "مدرک قابل‌نقل نبود"), x: L("It happened, but nobody could cite an outcome.", "اتفاق افتاده بود، ولی کسی نمی‌توانست نتیجه‌ای را نقل کند.") },
-        { t: L("Timing or advocacy", "زمان‌بندی یا حمایت"), x: L("A reorg, a missed cycle, a manager not convinced.", "یک بازسازی سازمانی، یک چرخه‌ی از دست‌رفته، مدیری که قانع نشده بود.") }
+        { t: L("The scope wasn't there yet", "scope هنوز کافی نبود"), x: L("Real work at the current level, not yet at the next.", "عملکرد در سطح فعلی قابل‌قبول بود، اما هنوز به سطح بعد نرسیده بود.") },
+        { t: L("The evidence wasn't quotable", "شواهد قابل‌استناد نبودند"), x: L("It happened, but nobody could cite an outcome.", "کار انجام شده بود، اما نتیجه‌ی مشخصی برای استناد وجود نداشت.") },
+        { t: L("Timing or advocacy", "زمان‌بندی یا حمایت"), x: L("A reorg, a missed cycle, a manager not convinced.", "تغییر ساختار سازمان، از دست رفتن یک چرخه‌ی ارزیابی یا قانع نشدن مدیر.") }
       ].map(function (c, i) { return '<div class="card card-flat"><span class="idea-n">' + S.digits(i + 1) + "</span><strong>" + md(c.t) + "</strong><p>" + md(c.x) + "</p></div>"; }).join("") + "</div></div>";
-    h += '<h3 class="h-sm sp">' + md(L("How it differs by employer (as reported)", "تفاوت بین کارفرماها (به‌صورت گزارش‌شده)")) + "</h3>";
+    h += '<h3 class="h-sm sp">' + md(L("How it differs by employer (as reported)", "تفاوت شرکت‌ها بر اساس گزارش‌ها")) + "</h3>";
     h += H.promoByCo.map(function (c) {
       return '<details class="acc"><summary><span>' + esc(c.who) + "</span> " + confTag(c.conf) + icon("chev", "chev") + '</summary><div class="acc-body"><p>' + md(c.text) + "</p></div></details>";
     }).join("");
@@ -162,29 +162,29 @@
       var b = P.bands[id];
       return { label: S.lv(id) + " <span class=\"muted\">" + esc(U.levelName(id)) + "</span>", from: b[0], to: b[1], mid: b[2], cls: "c" + id.slice(1) };
     });
-    var h = '<div class="card">' + '<h3 class="h-sm">' + md(L("Years of experience, by level (indicative)", "سال‌های تجربه بر حسب سطح (نمونه‌وار)")) + "</h3>" + U.ranges(rows, P.scale) +
+    var h = '<div class="card">' + '<h3 class="h-sm">' + md(L("Years of experience, by level (indicative)", "سال‌های تجربه در هر سطح (برای مقایسه‌ی تقریبی)")) + "</h3>" + U.ranges(rows, P.scale) +
       '<p class="legend"><span class="mid-key"></span>' + md(L("typical", "معمول")) + " &nbsp; <span class=\"bar-key\"></span>" + md(L("common range", "بازه‌ی رایج")) + "</p>" + U.source(P.note) + "</div>";
     h += '<div class="grid c2 sp">' +
       '<div class="card"><h3>' + icon("clock") + " " + md(L("What the ladder itself says", "خودِ نردبان چه می‌گوید")) + '</h3><ul class="tick"><li>' +
-      md(L("**L2 → L3:** operate at L3 within about six months; be L3 within a year at most.", "**L2 → L3:** ظرف حدود شش ماه در سطح L3 عمل کنید؛ حداکثر ظرف یک سال به L3 برسید.")) + "</li><li>" +
+      md(L("**L2 → L3:** operate at L3 within about six months; be L3 within a year at most.", "**L2 → L3:** ظرف حدود شش ماه در سطح L3 کار کنید. حداکثر ظرف یک سال به L3 برسید.")) + "</li><li>" +
       md(L("**L3 → L4:** typically one to two years. Everyone on the ladder is expected to reach L4.", "**L3 → L4:** معمولا یک تا دو سال. از همه‌ی افراد انتظار می‌رود به L4 برسند.")) + "</li><li>" +
-      md(L("**L4 and beyond:** no formula. The step is earned by scope and evidence, not by waiting.", "**L4 به بعد:** فرمولی نیست. این گام با scope و مدرک به دست می‌آید، نه با منتظر ماندن.")) + "</li></ul></div>" +
-      '<div class="card"><h3>' + icon("flag") + " " + md(L("Plateaus are normal, and sometimes chosen", "درجا زدن عادی است، و گاهی انتخاب شده")) + "</h3><p>" +
+      md(L("**L4 and beyond:** no formula. The step is earned by scope and evidence, not by waiting.", "**L4 به بعد:** فرمول زمانی مشخصی وجود ندارد. ارتقا با scope و شواهد عملکرد به دست می‌آید، نه با انتظار.")) + "</li></ul></div>" +
+      '<div class="card"><h3>' + icon("flag") + " " + md(L("Plateaus are normal, and sometimes chosen", "ماندن در یک سطح عادی است و گاهی انتخاب خود شماست")) + "</h3><p>" +
       md(L("Many large employers treat the first senior level as a place you can stay, by design, and some ladders say so outright (Honeycomb's Senior; Monzo's Engineer III as a legitimate stopping point). The useful question is whether a plateau is a choice you made or something that is happening to you.",
-        "بسیاری از کارفرماهای بزرگ اولین سطح ارشد را عمدا جایی می‌دانند که می‌شود در آن ماند، و بعضی نردبان‌ها صریحا می‌گویند (Senior در Honeycomb؛ Engineer III در Monzo به‌عنوان توقفگاه مشروع). پرسش مفید این است که درجا زدن انتخابِ خودتان است یا چیزی که برایتان اتفاق می‌افتد.")) + "</p></div></div>";
-    h += '<h3 class="h-sm sp">' + md(L("Time between promotions, as reported (weak sources)", "فاصله‌ی میان ارتقاها، به‌صورت گزارش‌شده (منابع ضعیف)")) + "</h3><div class=\"grid c2\">" +
+        "بسیاری از شرکت‌های بزرگ، اولین سطح ارشد را عمدا سطحی می‌دانند که می‌توان در آن ماند. بعضی نردبان‌ها این موضوع را صریح بیان می‌کنند، مثل Senior در Honeycomb و Engineer III در Monzo. پرسش مفید این است که ماندن در این سطح انتخاب شماست یا نتیجه‌ی موانعی که پیش رویتان قرار گرفته‌اند.")) + "</p></div></div>";
+    h += '<h3 class="h-sm sp">' + md(L("Time between promotions, as reported (weak sources)", "فاصله‌ی گزارش‌شده میان ارتقاها (منابع ضعیف)")) + "</h3><div class=\"grid c2\">" +
       P.reported.map(function (r) { return '<div class="card card-flat rep"><strong>' + esc(r.who) + "</strong><p>" + md(r.text) + "</p></div>"; }).join("") + "</div>";
-    h += U.callout("warn", L("Handle with care", "با احتیاط"), L("These intervals come from aggregators and single articles. They show that two years is common between early levels and that later steps vary widely. They are not a schedule you can be late for.", "این فاصله‌ها از تجمیع‌کننده‌ها و مقاله‌های منفرد می‌آیند. نشان می‌دهند دو سال میان سطح‌های اول رایج است و گام‌های بعدی بسیار متفاوت‌اند. برنامه‌ای نیستند که بشود از آن عقب ماند."));
+    h += U.callout("warn", L("Handle with care", "با احتیاط"), L("These intervals come from aggregators and single articles. They show that two years is common between early levels and that later steps vary widely. They are not a schedule you can be late for.", "این بازه‌ها از سایت‌های تجمیع‌کننده و مقاله‌های منفرد گرفته شده‌اند. بر اساس آن‌ها، فاصله‌ی دو سال میان سطح‌های ابتدایی رایج است و زمان گام‌های بعدی بسیار متفاوت است. این اعداد برنامه‌ی زمانی‌ای نیستند که لازم باشد خودتان را با آن بسنجید."));
     return h;
   }
 
   /* ---- non-evidence ---- */
   function sectionSignals() {
     var rows = H.nonEvidence.map(function (r) { return ['<span class="strike">' + md(r.says) + "</span>", md(r.asks)]; });
-    return U.table([md(L("Sounds positive, but isn't evidence", "مثبت به نظر می‌رسد، ولی مدرک نیست")), md(L("What a panel needs instead", "پنل به‌جایش چه می‌خواهد"))], rows, { cls: "nonev" }) +
+    return U.table([md(L("Sounds positive, but isn't evidence", "مثبت به نظر می‌رسد، اما شاهد عملکرد نیست")), md(L("What a panel needs instead", "کمیته در عوض چه شواهدی می‌خواهد"))], rows, { cls: "nonev" }) +
       U.callout("tip", L("Practise on your own sentences", "روی جمله‌های خودتان تمرین کنید"),
         L("Paste a line from your last self-review into the [impact statement builder](#/toolkit/statement) and see which of scope, role, result and “what persists” it is missing.",
-          "یک خط از آخرین خودارزیابی‌تان را در [سازنده‌ی جمله‌ی اثرگذاری](#/toolkit/statement) بگذارید و ببینید کدام‌یک از scope، نقش، نتیجه و «آنچه می‌ماند» در آن نیست."));
+          "یک جمله از آخرین خودارزیابی‌تان را در [سازنده‌ی جمله‌ی اثرگذاری](#/toolkit/statement) وارد کنید و ببینید کدام‌یک از scope، نقش، نتیجه و اثر ماندگار در آن مشخص نیست."));
   }
 
   S.views.how = {
@@ -193,30 +193,30 @@
         route: "how", kicker: L("Understand", "درک نردبان"), icon: "map",
         title: L("How leveling works", "سطح‌بندی چطور کار می‌کند"),
         lead: L("A level is a contract about scope. Here is what it bundles, what gets measured, how employers decide, and why the same title means different things in different places.",
-                "سطح یک قرارداد درباره‌ی scope است. اینجا می‌بینید چه چیزهایی را در خود جمع می‌کند، چه چیزی سنجیده می‌شود، کارفرماها چطور تصمیم می‌گیرند، و چرا یک عنوان در جاهای مختلف معنای متفاوتی دارد."),
+                "سطح، توافقی درباره‌ی scope است. اینجا ابعاد آن، معیارهای ارزیابی و نحوه‌ی تصمیم‌گیری شرکت‌ها را می‌بینید و می‌فهمید چرا یک عنوان در شرکت‌های مختلف معنای متفاوتی دارد."),
         tldr: [
-          L("Level, title and pay are three different things. The level is the contract; the title is a label; the pay band follows the level.", "سطح، عنوان و حقوق سه چیز متفاوتند. سطح قرارداد است؛ عنوان برچسب است؛ بازه‌ی حقوق از سطح نتیجه می‌شود."),
-          L("Four lenses, one yardstick: contribution, challenge, influence and expertise, all read together with impact.", "چهار بُعد، یک معیار: مشارکت، چالش، قدرت نفوذ و تخصص، همه کنار اثرگذاری خوانده می‌شوند."),
-          L("People who never worked with you often make the call, from what is written. Make your level easy to quote.", "کسانی که هرگز با شما کار نکرده‌اند اغلب بر اساس نوشته تصمیم می‌گیرند. سطحتان را قابل‌نقل کنید.")
+          L("Level, title and pay are three different things. The level is the contract; the title is a label; the pay band follows the level.", "سطح، عنوان و حقوق متفاوت‌اند. سطح، توافق درباره‌ی انتظارهاست. عنوان، برچسب است و بازه‌ی حقوق بر اساس سطح تعیین می‌شود."),
+          L("Four lenses, one yardstick: contribution, challenge, influence and expertise, all read together with impact.", "چهار بُعد، یک معیار فراگیر: مشارکت، چالش، قدرت نفوذ و تخصص، همگی در کنار اثرگذاری سنجیده می‌شوند."),
+          L("People who never worked with you often make the call, from what is written. Make your level easy to quote.", "ارزیابانی که با شما کار نکرده‌اند، اغلب بر اساس نوشته‌ها تصمیم می‌گیرند. برای سطح عملکردتان شواهد قابل‌استناد ارائه کنید.")
         ],
         sections: [
           { id: "what", label: L("What a level is", "سطح چیست") },
           { id: "lenses", label: L("Lenses", "بُعدها") },
-          { id: "altitude", label: L("Altitude", "ارتفاع") },
-          { id: "translator", label: L("Across employers", "میان کارفرماها") },
+          { id: "altitude", label: L("Altitude", "مقیاس کار") },
+          { id: "translator", label: L("Across employers", "تطبیق میان شرکت‌ها") },
           { id: "promotion", label: L("Promotions", "ارتقاها") },
-          { id: "pace", label: L("Pace", "سرعت") },
-          { id: "signals", label: L("Not evidence", "مدرک نیست") }
+          { id: "pace", label: L("Pace", "سرعت رشد") },
+          { id: "signals", label: L("Not evidence", "چه چیزی شاهد عملکرد نیست") }
         ]
       });
-      h += U.section("what", L("A level is a contract about scope", "سطح، قرارداد درباره‌ی scope است"), L("Four things get confused. Pull them apart and most leveling arguments get simpler.", "چهار چیز با هم قاطی می‌شوند. جدایشان کنید تا بیشترِ بحث‌های سطح‌بندی ساده‌تر شود."), sectionWhat());
-      h += U.section("lenses", L("Four lenses and one yardstick", "چهار بُعد و یک معیار"), L("Every level is described along the same lenses. What changes is how far each one reaches.", "هر سطح در امتداد همین بُعدها توصیف می‌شود. آنچه عوض می‌شود دامنه‌ی هر کدام است."), sectionLenses());
-      h += U.section("altitude", L("The altitude model", "مدل ارتفاع"), L("Behind every lens is the same shape: scope, autonomy, ambiguity, time horizon and the number of people you move. Slide up and watch them grow.", "پشت هر بُعد یک شکل ثابت هست: scope، استقلال، ابهام، افق زمانی و تعداد کسانی که جلو می‌برید. به بالا بکشید و رشدشان را ببینید."), sectionAltitude());
-      h += U.section("translator", L("Same ideas, different ladders", "ایده‌های یکسان، نردبان‌های متفاوت"), L("When you read a job post or a friend's title, translate scope, not words. Pick your employer to see where it sits on this guide's scale.", "وقتی آگهی شغلی یا عنوان یک دوست را می‌خوانید، scope را ترجمه کنید، نه کلمه‌ها را. کارفرمای خود را انتخاب کنید تا جایش روی مقیاس این راهنما را ببینید."), sectionTranslator());
-      h += U.section("promotion", L("How promotions are decided", "ارتقا چطور تصمیم‌گیری می‌شود"), L("The details differ, the shape doesn't: evidence, a case, input, a bar, a decision.", "جزئیات فرق می‌کند، شکلش نه: مدرک، پرونده، نظر دیگران، معیار، تصمیم."), sectionPromotion());
-      h += U.section("pace", L("Pace and plateaus", "سرعت و درجا زدن"), L("Years loosely track level, but the bands overlap a lot. Compare yourself to the evidence, not the calendar.", "سال‌ها تا حدی با سطح همراهند، ولی بازه‌ها بسیار هم‌پوشانی دارند. خودتان را با مدرک مقایسه کنید، نه با تقویم."), sectionPace());
-      h += U.section("signals", L("What is not level evidence", "چه چیزی مدرکِ سطح نیست"), L("Reviews are written in terms of the ladder. Statements that sound warm but name no problem and no result don't move a case.", "ارزیابی‌ها بر اساس نردبان نوشته می‌شوند. جمله‌هایی که گرم به نظر می‌رسند ولی نه مساله‌ای را نام می‌برند نه نتیجه‌ای را، پرونده را جلو نمی‌برند."), sectionSignals());
-      h += U.nextCard("levels", S.pageLabel("levels"), L("Each rung in detail: lenses, signals, traps and a story.", "هر پله با جزئیات: بُعدها، نشانه‌ها، تله‌ها و یک داستان."));
+      h += U.section("what", L("A level is a contract about scope", "سطح، توافقی درباره‌ی scope است"), L("Four things get confused. Pull them apart and most leveling arguments get simpler.", "چهار مفهوم اغلب با هم اشتباه گرفته می‌شوند. با تفکیک آن‌ها، بیشتر گفتگوهای سطح‌بندی روشن‌تر می‌شوند."), sectionWhat());
+      h += U.section("lenses", L("Four lenses and one yardstick", "چهار بُعد و یک معیار"), L("Every level is described along the same lenses. What changes is how far each one reaches.", "همه‌ی سطح‌ها بر اساس همین بُعدها توصیف می‌شوند. دامنه‌ی هر بُعد با افزایش سطح تغییر می‌کند."), sectionLenses());
+      h += U.section("altitude", L("The altitude model", "مدل مقیاس کار"), L("Behind every lens is the same shape: scope, autonomy, ambiguity, time horizon and the number of people you move. Slide up and watch them grow.", "پشت هر بُعد، الگوی مشترکی وجود دارد: scope، استقلال، ابهام، افق زمانی و تعداد افرادی که به پیشرفت کارشان کمک می‌کنید. سطح را بالا ببرید تا تغییر آن‌ها را ببینید."), sectionAltitude());
+      h += U.section("translator", L("Same ideas, different ladders", "ایده‌های یکسان، نردبان‌های متفاوت"), L("When you read a job post or a friend's title, translate scope, not words. Pick your employer to see where it sits on this guide's scale.", "هنگام خواندن آگهی شغلی یا عنوان یک همکار، scope را مقایسه کنید، نه صرفا واژه‌ها را. شرکت خودتان را انتخاب کنید تا جایگاه آن را در مقیاس این راهنما ببینید."), sectionTranslator());
+      h += U.section("promotion", L("How promotions are decided", "نحوه‌ی تصمیم‌گیری درباره‌ی ارتقا"), L("The details differ, the shape doesn't: evidence, a case, input, a bar, a decision.", "جزئیات متفاوت است، اما مراحل کلی مشترک‌اند: شواهد، پرونده، نظر دیگران، معیارها و تصمیم."), sectionPromotion());
+      h += U.section("pace", L("Pace and plateaus", "سرعت رشد و توقف آن"), L("Years loosely track level, but the bands overlap a lot. Compare yourself to the evidence, not the calendar.", "سابقه تا حدی با سطح مرتبط است، اما بازه‌ها هم‌پوشانی زیادی دارند. عملکردتان را با شواهد بسنجید، نه با تقویم."), sectionPace());
+      h += U.section("signals", L("What is not level evidence", "چه چیزهایی نشان‌دهنده‌ی سطح نیستند"), L("Reviews are written in terms of the ladder. Statements that sound warm but name no problem and no result don't move a case.", "ارزیابی بر اساس نردبان انجام می‌شود. جمله‌های تحسین‌آمیزی که مساله یا نتیجه‌ی مشخصی را بیان نمی‌کنند، به پرونده‌ی ارتقا کمک نمی‌کنند."), sectionSignals());
+      h += U.nextCard("levels", S.pageLabel("levels"), L("Each rung in detail: lenses, signals, traps and a story.", "جزئیات هر پله: بُعدها، نشانه‌ها، دام‌ها و یک داستان."));
       root.innerHTML = h;
 
       // e2e checklist
@@ -246,7 +246,7 @@
         var id = lvSel.value;
         S.$$("#trTable tbody tr", root).forEach(function (tr) { tr.classList.toggle("is-me", tr.getAttribute("data-lv") === id); });
         var lv = S.levelById(id);
-        out.innerHTML = '<span class="muted">' + md(L("Reads like this guide's", "در مقیاس این راهنما می‌خواند")) + "</span> " + S.lv(id) + " <strong>" + md(lv.name) + "</strong> <span class=\"muted\">" + md(L("(± one level)", "(با یک سطح کمی‌بیشی)")) + "</span>";
+        out.innerHTML = '<span class="muted">' + md(L("Reads like this guide's", "معادل آن در مقیاس این راهنما")) + "</span> " + S.lv(id) + " <strong>" + md(lv.name) + "</strong> <span class=\"muted\">" + md(L("(± one level)", "(با اختلاف احتمالی یک سطح)")) + "</span>";
       }
       if (co && lvSel) {
         co.addEventListener("change", fillLevels);
@@ -258,13 +258,13 @@
     },
     search: function () {
       var P = [
-        ["what", L("What a level is: level vs title vs pay band", "سطح چیست: سطح، عنوان و بازه‌ی حقوق"), L("A level is a contract about scope; titles travel badly; pay bands follow level.", "سطح قرارداد درباره‌ی scope است؛ عنوان‌ها بد سفر می‌کنند؛ بازه‌ی حقوق از سطح می‌آید.")],
-        ["lenses", L("Four lenses and impact", "چهار بُعد و اثرگذاری"), L("Contribution, challenge, influence, expertise; impact beyond them; problem vs solution complexity; end-to-end checklist.", "مشارکت، چالش، قدرت نفوذ، تخصص؛ اثرگذاری فراتر از آن‌ها؛ پیچیدگی مساله در برابر راه‌حل؛ چک‌لیست end-to-end.")],
-        ["altitude", L("The altitude model: scope, autonomy, ambiguity, horizon", "مدل ارتفاع: scope، استقلال، ابهام، افق"), L("How scope, ambiguity and people grow with each level.", "رشد scope، ابهام و افراد با هر سطح.")],
-        ["translator", L("Level translator across employers", "مترجم سطح میان کارفرماها"), L("Google L5, Meta E5, Amazon L6, Microsoft 63–64 and more, mapped to bands.", "Google L5، Meta E5، Amazon L6، Microsoft 63–64 و بیشتر، روی بازه‌ها.")],
-        ["promotion", L("How promotions are decided", "ارتقا چطور تصمیم‌گیری می‌شود"), L("Evidence, manager case, peer input, calibration or committee, decision.", "مدرک، پرونده‌ی مدیر، نظر همکاران، calibration یا کمیته، تصمیم.")],
-        ["pace", L("Pace and plateaus: how long each level takes", "سرعت و درجا زدن: هر سطح چقدر طول می‌کشد"), L("Years of experience by level, overlapping bands, time between promotions.", "سال‌های تجربه بر حسب سطح، بازه‌های هم‌پوشان، فاصله‌ی ارتقاها.")],
-        ["signals", L("What is not level evidence", "چه چیزی مدرکِ سطح نیست"), L("Being well known, attending meetings, owning a big system, tenure.", "معروف بودن، شرکت در جلسه‌ها، در دست داشتن سیستم بزرگ، سابقه.")]
+        ["what", L("What a level is: level vs title vs pay band", "سطح چیست: سطح، عنوان و بازه‌ی حقوق"), L("A level is a contract about scope; titles travel badly; pay bands follow level.", "سطح، توافقی درباره‌ی scope است. عنوان‌ها میان شرکت‌ها قابل مقایسه نیستند و بازه‌ی حقوق بر اساس سطح تعیین می‌شود.")],
+        ["lenses", L("Four lenses and impact", "چهار بُعد و اثرگذاری"), L("Contribution, challenge, influence, expertise; impact beyond them; problem vs solution complexity; end-to-end checklist.", "مشارکت، چالش، قدرت نفوذ و تخصص در کنار اثرگذاری، تفاوت پیچیدگی مساله و راه‌حل و چک‌لیست end-to-end.")],
+        ["altitude", L("The altitude model: scope, autonomy, ambiguity, horizon", "مدل مقیاس کار: scope، استقلال، ابهام و افق زمانی"), L("How scope, ambiguity and people grow with each level.", "افزایش scope، ابهام و تعداد افراد درگیر با بالا رفتن سطح.")],
+        ["translator", L("Level translator across employers", "تطبیق سطح میان شرکت‌ها"), L("Google L5, Meta E5, Amazon L6, Microsoft 63–64 and more, mapped to bands.", "Google L5، Meta E5، Amazon L6، Microsoft 63–64 و دیگر کدها، با نمایش بازه‌های تقریبی تطبیق.")],
+        ["promotion", L("How promotions are decided", "نحوه‌ی تصمیم‌گیری درباره‌ی ارتقا"), L("Evidence, manager case, peer input, calibration or committee, decision.", "شواهد، پرونده‌ی مدیر، نظر همکاران، calibration یا کمیته و تصمیم.")],
+        ["pace", L("Pace and plateaus: how long each level takes", "سرعت رشد و توقف آن: هر سطح چقدر زمان می‌برد"), L("Years of experience by level, overlapping bands, time between promotions.", "سال‌های تجربه بر حسب سطح، بازه‌های هم‌پوشان، فاصله‌ی ارتقاها.")],
+        ["signals", L("What is not level evidence", "چه چیزهایی نشان‌دهنده‌ی سطح نیستند"), L("Being well known, attending meetings, owning a big system, tenure.", "معروف بودن، حضور در جلسه‌ها، مسئولیت یک سیستم بزرگ و سابقه.")]
       ];
       return P.map(function (p) { return { kind: L("How leveling works", "سطح‌بندی چطور کار می‌کند"), title: p[1], text: p[2], route: "how/" + p[0] }; });
     }

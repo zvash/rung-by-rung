@@ -41,26 +41,26 @@
 
   function summaryHtml() {
     var r = stats(), pct = S.isFa() ? "٪" : "%";
-    var h = '<div class="card prac-sum"><div class="prac-sum-h"><div><h3>' + icon("target") + " " + md(L("Where your instincts sit", "غریزه‌ی شما کجا می‌نشیند")) + '</h3><p class="muted">' + md(L("Answered", "پاسخ‌داده‌شده")) + ": <strong>" + S.digits(r.n) + " / " + S.digits(r.total) + "</strong></p></div>" +
+    var h = '<div class="card prac-sum"><div class="prac-sum-h"><div><h3>' + icon("target") + " " + md(L("Where your instincts sit", "رویکرد معمول شما با کدام سطح تناسب دارد")) + '</h3><p class="muted">' + md(L("Answered", "پاسخ‌داده‌شده")) + ": <strong>" + S.digits(r.n) + " / " + S.digits(r.total) + "</strong></p></div>" +
       (r.n ? '<button type="button" class="btn sm secondary" data-prac-reset="1">' + icon("reset") + md(L("Start over", "شروع دوباره")) + "</button>" : "") + "</div>";
     if (r.n < 3) {
-      h += '<p class="muted">' + md(L("Answer at least three situations to see a pattern. Pick what you would actually do, not what sounds best.", "دست‌کم سه وضعیت را پاسخ دهید تا الگو دیده شود. آنچه واقعا می‌کنید را انتخاب کنید، نه آنچه بهتر به نظر می‌رسد.")) + "</p>";
+      h += '<p class="muted">' + md(L("Answer at least three situations to see a pattern. Pick what you would actually do, not what sounds best.", "به دست‌کم سه موقعیت پاسخ دهید تا الگوی انتخاب‌هایتان مشخص شود. کاری را انتخاب کنید که واقعا انجام می‌دهید، نه گزینه‌ای که بهتر به نظر می‌رسد.")) + "</p>";
       return h + "</div>";
     }
     var rows = [2, 3, 4, 5, 6, 7].map(function (lv) { return { label: S.lv("L" + lv), value: r.dist[lv] || 0, max: Math.max(1, r.n), text: S.digits(r.dist[lv] || 0) }; });
     rows.push({ label: '<span class="tag bad">' + md(L("backfires", "نتیجه‌ی معکوس")) + "</span>", value: r.dist[0] || 0, max: Math.max(1, r.n), text: S.digits(r.dist[0] || 0), cls: "neg" });
     h += '<div class="grid c2 prac-grid"><div>' + U.bars(rows) + "</div><div class=\"prac-read\">";
-    if (r.cnt) h += "<p>" + md(L("Your choices average level **" + r.avg.toFixed(1) + "** of thinking, and **" + r.atOrAbove + " of " + r.n + "** were at or above the situation's own level.", "میانگین سطح تفکر انتخاب‌های شما **" + r.avg.toFixed(1) + "** است و **" + r.atOrAbove + " مورد از " + r.n + "** در سطح خودِ وضعیت یا بالاتر بود.")) + "</p>";
+    if (r.cnt) h += "<p>" + md(L("Your choices average level **" + r.avg.toFixed(1) + "** of thinking, and **" + r.atOrAbove + " of " + r.n + "** were at or above the situation's own level.", "میانگین سطح رویکردهای انتخابی شما **" + r.avg.toFixed(1) + "** است و **" + r.atOrAbove + " مورد از " + r.n + "** با سطح موقعیت برابر یا بالاتر بودند.")) + "</p>";
     var me = S.state.me;
     if (me && r.cnt) {
       var mv = levelNum(me), d = r.avg - mv, msg;
-      if (d >= 0.5) msg = L("That's above your current level ({" + me + "}). Either you're ready to be stretched, or you're answering the way you think is best rather than what you do. Compare with a real recent example.", "این بالاتر از سطح فعلی شماست ({" + me + "}). یا آماده‌ی پروژه‌ی چالشی هستید، یا طوری جواب می‌دهید که فکر می‌کنید بهتر است، نه آنچه می‌کنید. با یک نمونه‌ی واقعیِ اخیر مقایسه کنید.");
-      else if (d <= -0.5) msg = L("That's below your current level ({" + me + "}). Reread the situations where you chose a lower altitude: the notes show what the next level adds, and it's usually one extra step, not a different person.", "این پایین‌تر از سطح فعلی شماست ({" + me + "}). وضعیت‌هایی را که ارتفاع پایین‌تر را انتخاب کردید دوباره بخوانید: یادداشت‌ها نشان می‌دهند سطح بعد چه چیزی اضافه می‌کند، و معمولا یک گام اضافه است، نه آدمی دیگر.");
+      if (d >= 0.5) msg = L("That's above your current level ({" + me + "}). Either you're ready to be stretched, or you're answering the way you think is best rather than what you do. Compare with a real recent example.", "این نتیجه بالاتر از سطح فعلی شماست ({" + me + "}). شاید آماده‌ی پروژه‌ای چالشی‌تر هستید یا پاسخ مطلوب را انتخاب کرده‌اید، نه کاری را که در عمل انجام می‌دهید. نتیجه را با تجربه‌ای واقعی و اخیر مقایسه کنید.");
+      else if (d <= -0.5) msg = L("That's below your current level ({" + me + "}). Reread the situations where you chose a lower altitude: the notes show what the next level adds, and it's usually one extra step, not a different person.", "این نتیجه پایین‌تر از سطح فعلی شماست ({" + me + "}). موقعیت‌هایی را که در آن‌ها پاسخ سطح پایین‌تر را انتخاب کردید دوباره بخوانید. توضیح‌ها نشان می‌دهند سطح بعد چه چیزی اضافه می‌کند. معمولا فقط یک اقدام بیشتر لازم است، نه تغییر کامل شیوه‌ی کارتان.");
       else msg = L("That's in line with your current level ({" + me + "}).", "این با سطح فعلی شما ({" + me + "}) هم‌خوان است.");
       h += "<p>" + md(msg) + "</p>";
     }
-    if (r.misfires) h += "<p>" + md(L("**" + r.misfires + "** of your choices were tempting moves that backfire. They're worth rereading: they're the ones people most often regret.", "**" + r.misfires + "** مورد از انتخاب‌های شما حرکت‌هایی وسوسه‌انگیز بود که نتیجه‌ی معکوس می‌دهد. ارزش دوباره خواندن دارند: همان‌هایی‌اند که آدم‌ها بیشتر از همه پشیمان می‌شوند.")) + "</p>";
-    h += '<p class="subtle sm">' + md(L("This isn't a test. Real situations carry context that a few lines can't.", "این آزمون نیست. وضعیت‌های واقعی context‌ای دارند که چند خط نمی‌تواند داشته باشد.")) + "</p>";
+    if (r.misfires) h += "<p>" + md(L("**" + r.misfires + "** of your choices were tempting moves that backfire. They're worth rereading: they're the ones people most often regret.", "**" + r.misfires + "** مورد از انتخاب‌های شما اقدام‌هایی وسوسه‌انگیز با نتیجه‌ی معکوس بودند. توضیح آن‌ها را دوباره بخوانید. این‌ها از انتخاب‌هایی‌اند که افراد بیشتر از همه از آن‌ها پشیمان می‌شوند.")) + "</p>";
+    h += '<p class="subtle sm">' + md(L("This isn't a test. Real situations carry context that a few lines can't.", "این آزمون نیست. موقعیت‌های واقعی زمینه و جزئیاتی دارند که در چند خط نمی‌گنجند.")) + "</p>";
     return h + "</div></div></div>";
   }
 
@@ -79,15 +79,15 @@
     var o = s.options[chosen];
     h += '<div class="opt-list reveal">' + order.map(function (k, pos) {
       var x = s.options[k], mis = x.lv === 0, on = k === chosen;
-      var badge = mis ? '<span class="tag bad">' + icon("alert") + md(L("A tempting move that backfires", "حرکت وسوسه‌انگیزی که نتیجه‌ی معکوس می‌دهد")) + "</span>"
+      var badge = mis ? '<span class="tag bad">' + icon("alert") + md(L("A tempting move that backfires", "اقدامی وسوسه‌انگیز با نتیجه‌ی معکوس")) + "</span>"
         : '<span class="opt-lv">' + md(L("Level of thinking: ", "سطح تفکر: ")) + S.lv("L" + x.lv) + "</span>";
       return '<div class="opt-r' + (on ? " is-chosen" : "") + (mis ? " is-mis" : "") + '"><span class="opt-ltr">' + LETTERS[pos] + '</span><div class="opt-body"><div class="opt-head">' + badge + (on ? '<span class="tag brand">' + md(L("You chose this", "شما این را انتخاب کردید")) + "</span>" : "") + "</div><p>" + md(x.t) + '</p><p class="opt-why">' + md(x.why) + "</p></div></div>";
     }).join("") + "</div>";
     var kind, msg;
-    if (o.lv === 0) { kind = "warn"; msg = L("You picked a tempting move that backfires. Read why above: the same instinct, pointed a little differently, is usually the senior one.", "حرکتی وسوسه‌انگیز را انتخاب کردید که نتیجه‌ی معکوس می‌دهد. دلیلش را بالا بخوانید: همان غریزه، با کمی جهت دیگر، معمولا حرکت ارشدانه است."); }
-    else if (o.lv < sl) { kind = "note"; msg = L("A step below this situation's own level ({" + s.level + "}). That's a reasonable choice, and the options above show what the next step adds.", "یک گام پایین‌تر از سطح خودِ این وضعیت ({" + s.level + "}). انتخاب معقولی است و گزینه‌های بالا نشان می‌دهند گام بعد چه چیزی اضافه می‌کند."); }
-    else if (o.lv === sl) { kind = "good"; msg = L("That's this situation's own level ({" + s.level + "}).", "این همان سطح خودِ این وضعیت ({" + s.level + "}) است."); }
-    else { kind = "tip"; msg = L("Above this situation's level ({" + s.level + "}). That's a strength if you also do the lower-level basics reliably, and a risk if the context doesn't call for it.", "بالاتر از سطح این وضعیت ({" + s.level + "}). اگر کارهای پایه‌ی سطح پایین‌تر را هم قابل‌اتکا انجام می‌دهید یک نقطه‌ی قوت است، و اگر context لازمش نکند، یک ریسک."); }
+    if (o.lv === 0) { kind = "warn"; msg = L("You picked a tempting move that backfires. Read why above: the same instinct, pointed a little differently, is usually the senior one.", "اقدامی وسوسه‌انگیز با نتیجه‌ی معکوس انتخاب کردید. دلیل آن را بالا بخوانید. همین رویکرد، با کمی تغییر جهت، معمولا می‌تواند به اقدامی متناسب با سطح ارشد تبدیل شود."); }
+    else if (o.lv < sl) { kind = "note"; msg = L("A step below this situation's own level ({" + s.level + "}). That's a reasonable choice, and the options above show what the next step adds.", "یک گام پایین‌تر از سطح این موقعیت ({" + s.level + "}). انتخابی منطقی است و گزینه‌های بالا نشان می‌دهند گام بعد چه چیزی به آن اضافه می‌کند."); }
+    else if (o.lv === sl) { kind = "good"; msg = L("That's this situation's own level ({" + s.level + "}).", "این پاسخ با سطح همین موقعیت ({" + s.level + "}) مطابقت دارد."); }
+    else { kind = "tip"; msg = L("Above this situation's level ({" + s.level + "}). That's a strength if you also do the lower-level basics reliably, and a risk if the context doesn't call for it.", "بالاتر از سطح این موقعیت ({" + s.level + "}). اگر کارهای پایه‌ی سطح پایین‌تر را هم با اطمینان انجام می‌دهید، این نقطه‌ی قوت شماست. اگر شرایط چنین اقدامی را لازم نکند، ممکن است ریسک ایجاد کند."); }
     h += U.callout(kind, null, msg) + U.callout("rule", L("The takeaway", "نتیجه"), s.takeaway);
     h += '<div class="btn-row"><button type="button" class="btn sm secondary" data-prac-again="' + s.id + '">' + icon("reset") + md(L("Choose again", "دوباره انتخاب کنید")) + "</button></div>";
     return h;
@@ -109,20 +109,20 @@
         route: "practice", kicker: L("Practice", "تمرین"), icon: "play",
         title: L("What would you do?", "شما چه می‌کردید؟"),
         lead: L("Short situations from ordinary engineering weeks. Pick what you would actually do, not what sounds best. Every option shows the level of thinking behind it, so you can see where your instincts sit.",
-                "وضعیت‌های کوتاه از هفته‌های عادی کار مهندسی. آنچه واقعا می‌کنید را انتخاب کنید، نه آنچه بهتر به نظر می‌رسد. هر گزینه سطح تفکر پشتش را نشان می‌دهد تا ببینید غریزه‌ی شما کجا می‌نشیند."),
+                "موقعیت‌هایی کوتاه از یک هفته‌ی معمول کاری در مهندسی نرم‌افزار. کاری را انتخاب کنید که واقعا انجام می‌دهید، نه گزینه‌ای که بهتر به نظر می‌رسد. هر گزینه سطح تفکر پشت آن را نشان می‌دهد تا رویکرد معمول خود را بشناسید."),
         tldr: [
-          L("Sixteen situations, from a first-year engineer stuck on a bug to a staff engineer caught between two directors.", "شانزده وضعیت، از مهندس سال اولی که روی یک باگ گیر کرده تا مهندس staffی که میان دو مدیر مانده."),
-          L("No option is stupid. The lower ones are what a reasonable person does; the notes explain what the next level adds.", "هیچ گزینه‌ای احمقانه نیست. گزینه‌های پایین‌تر کاری است که یک آدم معقول می‌کند؛ یادداشت‌ها توضیح می‌دهند سطح بعد چه چیزی اضافه می‌کند."),
-          L("Some options are tempting moves that backfire. They're marked, and they're the most useful ones to read.", "بعضی گزینه‌ها حرکت‌های وسوسه‌انگیزی‌اند که نتیجه‌ی معکوس می‌دهند. مشخص شده‌اند و خواندنشان از همه مفیدتر است.")
+          L("Sixteen situations, from a first-year engineer stuck on a bug to a staff engineer caught between two directors.", "شانزده موقعیت، از مهندس سال اولی که در رفع یک باگ block شده تا مهندس staff که میان خواسته‌های دو مدیر قرار گرفته است."),
+          L("No option is stupid. The lower ones are what a reasonable person does; the notes explain what the next level adds.", "هیچ گزینه‌ای احمقانه نیست. گزینه‌های سطح پایین‌تر هم انتخاب‌هایی منطقی‌اند. توضیح‌ها نشان می‌دهند سطح بعد چه چیزی به رویکرد شما اضافه می‌کند."),
+          L("Some options are tempting moves that backfire. They're marked, and they're the most useful ones to read.", "بعضی گزینه‌ها وسوسه‌انگیزند، اما نتیجه‌ی معکوس می‌دهند. این موارد مشخص شده‌اند و خواندن توضیحشان بسیار مفید است.")
         ]
       });
       var levelChips = U.pill(L("All levels", "همه‌ی سطح‌ها"), 'data-pl="all"', true) + ["L2", "L3", "L4", "L5", "L6"].map(function (l) {
         return '<button type="button" class="pill lvl-pill" data-pl="' + l + '" aria-pressed="false">' + S.lv(l) + "</button>";
       }).join("");
       h += '<div id="pracSummary">' + summaryHtml() + "</div>";
-      h += '<div class="faq-tools prac-tools"><div class="faq-chips" role="group" aria-label="' + esc(S.plain(L("Situation level", "سطح وضعیت"))) + '">' + levelChips + "</div></div>";
+      h += '<div class="faq-tools prac-tools"><div class="faq-chips" role="group" aria-label="' + esc(S.plain(L("Situation level", "سطح موقعیت"))) + '">' + levelChips + "</div></div>";
       h += '<div class="scen-list" id="scenList">' + list.map(function (s) { return itemHtml(s, st); }).join("") + "</div>";
-      h += U.nextCard("toolkit", S.pageLabel("toolkit"), L("Take the lesson into your week: an evidence log, impact statements and a 1:1 kit.", "درس را به هفته‌ی کاری‌تان ببرید: سند دستاوردها، جمله‌های اثرگذاری و بسته‌ی 1:1."));
+      h += U.nextCard("toolkit", S.pageLabel("toolkit"), L("Take the lesson into your week: an evidence log, impact statements and a 1:1 kit.", "آموخته‌ها را در هفته‌ی کاری‌تان به کار ببرید: سند دستاوردها، جمله‌های اثرگذاری و بسته‌ی 1:1."));
       root.innerHTML = h;
       view.root = root;
 

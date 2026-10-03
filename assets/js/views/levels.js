@@ -8,7 +8,7 @@
     { id: "autonomy", icon: "compass", label: L("Autonomy", "استقلال") },
     { id: "ambiguity", icon: "mountain", label: L("Ambiguity", "ابهام") },
     { id: "horizon", icon: "clock", label: L("Time horizon", "افق زمانی") },
-    { id: "people", icon: "users", label: L("People you move", "افرادی که جلو می‌برید") }
+    { id: "people", icon: "users", label: L("People you move", "افرادی که هدایت می‌کنید") }
   ];
   var TABS = [
     { id: "glance", icon: "eye", label: L("Overview", "نگاه کلی") },
@@ -35,7 +35,7 @@
 
   function glance(lv) {
     var h = '<p class="lvd-essence">' + md(lv.essence) + "</p>";
-    h += '<h3 class="h-sm">' + esc(S.plain(L("The altitude of this rung", "ارتفاع این پله"))) + "</h3>";
+    h += '<h3 class="h-sm">' + esc(S.plain(L("The altitude of this rung", "مقیاس کار در این پله"))) + "</h3>";
     h += '<dl class="alt">';
     ALT.forEach(function (a) {
       h += "<div><dt>" + icon(a.icon) + "<span>" + md(a.label) + "</span></dt><dd>" + md(lv.altitude[a.id]) + "</dd></div>";
@@ -58,9 +58,9 @@
   }
 
   function signalsTab(lv) {
-    return '<div class="grid c2"><div class="card"><h3>' + icon("check") + " " + md(L("You are probably operating here when…", "احتمالا در این سطح عمل می‌کنید وقتی…")) + "</h3><ul class=\"tick\">" +
+    return '<div class="grid c2"><div class="card"><h3>' + icon("check") + " " + md(L("You are probably operating here when…", "احتمالا در این سطح کار می‌کنید اگر…")) + "</h3><ul class=\"tick\">" +
       lv.signals.map(function (x) { return "<li>" + md(x) + "</li>"; }).join("") + "</ul></div>" +
-      '<div class="card"><h3>' + icon("alert") + " " + md(L("Traps that keep people on this rung", "تله‌هایی که آدم‌ها را روی این پله نگه می‌دارند")) + "</h3><ul class=\"cross\">" +
+      '<div class="card"><h3>' + icon("alert") + " " + md(L("Traps that keep people on this rung", "دام‌هایی که مانع رشد در این پله می‌شوند")) + "</h3><ul class=\"cross\">" +
       lv.traps.map(function (x) { return "<li>" + md(x) + "</li>"; }).join("") + "</ul></div></div>";
   }
 
@@ -69,7 +69,7 @@
     if (!nl) {
       return U.callout("note", L("Beyond L7", "فراتر از L7"),
         L("The ladder continues at some companies (principal, distinguished, fellow), but at that height the roles are largely written around the person. The useful question becomes: which problem is worth a decade of your attention, and who will carry it after you?",
-          "در برخی شرکت‌ها نردبان ادامه دارد (principal، distinguished، fellow)، ولی در آن ارتفاع نقش‌ها بیشتر دورِ خودِ آدم نوشته می‌شوند. پرسش مفید این می‌شود: کدام مساله ارزش یک دهه توجه شما را دارد و بعد از شما چه کسی آن را به دوش می‌کشد؟"));
+          "در برخی شرکت‌ها نردبان ادامه دارد (principal، distinguished، fellow)، اما در این سطح‌ها نقش‌ها بیشتر متناسب با خود فرد تعریف می‌شوند. پرسش مفید این است: کدام مساله ارزش یک دهه تمرکز شما را دارد و بعد از شما چه کسی مسئولیت آن را بر عهده می‌گیرد؟"));
     }
     var h = '<p class="up-q"><span class="h-sm">' + md(L("The question at the next rung", "پرسش پله‌ی بعد")) + "</span>" + S.lv(nx) + " " + md(nl.question) + "</p>";
     h += '<div class="grid c2 up-grid">';
@@ -78,14 +78,14 @@
     });
     h += "</div>";
     h += '<div class="btn-row up-cta"><a class="btn" href="#/grow/playbooks" data-grow-from="' + lv.id + '">' + icon("trend") + md(L("Open the playbook for ", "نقشه‌ی راه ")) + S.lv(lv.id) + ' <span class="hop-arrow">' + icon("arrow", "dir") + "</span> " + S.lv(nx) + "</a>" +
-      '<a class="btn secondary" href="#/locate">' + icon("target") + md(L("Check where I am today", "ببینم امروز کجا هستم")) + "</a></div>";
+      '<a class="btn secondary" href="#/locate">' + icon("target") + md(L("Check where I am today", "بررسی جایگاه فعلی من")) + "</a></div>";
     return h;
   }
 
   function storyTab(lv) {
     return '<div class="card story"><div class="story-h">' + icon("chat") + "<h3>" + md(lv.story.title) + "</h3><span class=\"tag\">" + md(L("A composite story", "داستانی ترکیبی")) + "</span></div>" +
       '<div class="story-body">' + S.rich(lv.story.body) + "</div>" +
-      '<p class="source">' + icon("flag") + "<span>" + md(L("The ==highlighted== phrases are the signals a review panel would quote.", "عبارت‌های ==هایلایت‌شده== همان نشانه‌هایی‌اند که یک پنل ارزیابی نقل می‌کند.")) + "</span></p></div>";
+      '<p class="source">' + icon("flag") + "<span>" + md(L("The ==highlighted== phrases are the signals a review panel would quote.", "عبارت‌های ==برجسته‌شده== همان نشانه‌هایی‌اند که کمیته‌ی ارزیابی به آن‌ها استناد می‌کند.")) + "</span></p></div>";
   }
 
   function detailHtml(id, tab) {
@@ -115,7 +115,7 @@
       return ['<span class="lens-cell">' + icon(lens.icon) + md(lens.name) + "</span>"].concat(hops.map(function (id) { return md(S.levelById(id).shift[lens.id]); }));
     });
     var out = "";
-    if (hops.length > 1) out += '<p class="jump-note">' + md(L("That is **" + hops.length + " steps**, usually years apart. Read each column as a separate promotion, not one leap.", "این **" + hops.length + " گام** است، معمولا با سال‌ها فاصله. هر ستون را یک ارتقای جدا بخوانید، نه یک جهش.")) + "</p>";
+    if (hops.length > 1) out += '<p class="jump-note">' + md(L("That is **" + hops.length + " steps**, usually years apart. Read each column as a separate promotion, not one leap.", "این مسیر **" + hops.length + " گام** دارد و معمولا بین این گام‌ها چند سال فاصله است. هر ستون را یک ارتقای مستقل در نظر بگیرید.")) + "</p>";
     return out + U.table(head, rows, { cls: "jump-table" });
   }
 
@@ -150,34 +150,34 @@
         route: "levels", kicker: L("Understand", "درک نردبان"), icon: "stairs",
         title: L("The levels, L2 to L7", "سطح‌ها، از L2 تا L7"),
         lead: L("Pick a rung to see what it expects, how it differs from the one above, and what it looks like in a real week.",
-                "یک پله را انتخاب کنید تا ببینید چه انتظاری دارد، با پله‌ی بالاتر چه فرقی دارد و در یک هفته‌ی واقعی چه شکلی است."),
+                "یک پله انتخاب کنید تا انتظارات آن، تفاوتش با پله‌ی بعد و شکل معمول یک هفته‌ی کاری در آن را ببینید."),
         tldr: [
           L("Each level answers a bigger question. From L6 on, each level is effectively a different role, not just “more L5”.", "هر سطح به پرسشی بزرگ‌تر پاسخ می‌دهد. از L6 به بعد هر سطح عملا یک نقش متفاوت است، نه صرفا «بیشتر از L5»."),
-          L("The four lenses stay the same on every rung. What rises is the altitude: scope, ambiguity, time horizon and how many people you move.", "چهار بُعد در هر پله یکی است. آنچه بالا می‌رود ارتفاع است: scope، ابهام، افق زمانی و تعداد کسانی که با خود جلو می‌برید."),
-          L("Three habits (citizenship, teamwork, engineering practices) apply on every rung. Only their radius grows.", "سه عادت (مشارکت شهروندی، کار تیمی، رویه‌های مهندسی) در هر پله لازم‌اند. فقط شعاعشان بزرگ‌تر می‌شود.")
+          L("The four lenses stay the same on every rung. What rises is the altitude: scope, ambiguity, time horizon and how many people you move.", "چهار بُعد در همه‌ی پله‌ها مشترک‌اند. آنچه افزایش می‌یابد، مقیاس کار است: scope، ابهام، افق زمانی و تعداد افرادی که همراه خود پیش می‌برید."),
+          L("Three habits (citizenship, teamwork, engineering practices) apply on every rung. Only their radius grows.", "سه عادت مشارکت شهروندی، کار تیمی و رویه‌های مهندسی در همه‌ی پله‌ها لازم‌اند. دامنه‌ی اثر آن‌ها با سطح افزایش می‌یابد.")
         ],
         sections: [
-          { id: "explorer", label: L("Explorer", "کاوشگر") },
+          { id: "explorer", label: L("Explorer", "بررسی سطح‌ها") },
           { id: "jump", label: L("Compare steps", "مقایسه‌ی گام‌ها") },
-          { id: "week", label: L("Shape of a week", "شکل یک هفته") },
+          { id: "week", label: L("Shape of a week", "هفته‌ی کاری") },
           { id: "habits", label: L("Habits on every rung", "عادت‌های هر پله") }
         ]
       });
       h += U.section("explorer", null, null, '<div class="lvx">' + '<div id="lvxRail"></div><div id="lvxDetail" class="lvx-detail"></div></div>');
-      h += U.section("jump", L("How far is the jump?", "فاصله‌ی این جهش چقدر است؟"),
+      h += U.section("jump", L("How far is the jump?", "فاصله‌ی این دو سطح چقدر است؟"),
         L("Choose where you are and where you want to be. Each step is shown as its own change, because each is a separate promotion.",
           "انتخاب کنید کجا هستید و می‌خواهید کجا باشید. هر گام جداگانه نشان داده می‌شود، چون هر گام یک ارتقای مستقل است."),
         '<div class="jump-pick"><label>' + md(L("From", "از")) + levelSelect("jumpFrom", jf) + "</label><span class=\"jump-arrow\">" + icon("arrow", "dir") + "</span><label>" + md(L("To", "به")) + levelSelect("jumpTo", jt) + '</label></div><div id="jumpOut">' + jumpTable(jf, jt) + "</div>");
-      h += U.section("week", L("The shape of a week changes", "شکل هفته‌ی کاری عوض می‌شود"),
-        L("Not how many hours you work, but where the attention goes. Darker means more of the week.", "نه این‌که چند ساعت کار می‌کنید، بلکه توجهتان کجا خرج می‌شود. تیره‌تر یعنی سهم بیشتری از هفته."),
-        weekTable() + U.callout("note", L("Illustrative, not survey data", "نمونه‌ای توضیحی، نه داده‌ی پیمایش"),
+      h += U.section("week", L("The shape of a week changes", "ترکیب کارها در طول هفته تغییر می‌کند"),
+        L("Not how many hours you work, but where the attention goes. Darker means more of the week.", "این نمودار نشان می‌دهد وقت و توجه شما صرف چه کارهایی می‌شود، نه این‌که چند ساعت کار می‌کنید. رنگ تیره‌تر یعنی سهم بیشتر از هفته."),
+        weekTable() + U.callout("note", L("Illustrative, not survey data", "این تصویر برای فهم بهتر آورده شده و حاصل یک پژوهش آماری نیست"),
           L("This is a composite of how the work typically shifts, drawn from public career ladders and staff-engineer writing. Roles vary: a specialist at L6 may code far more than a tech lead at L5. The pattern to notice is the direction, not the exact cell.",
-            "این تصویری ترکیبی از جابه‌جایی معمول کار است، برگرفته از نردبان‌های شغلی عمومی و نوشته‌های مهندسان staff. نقش‌ها متفاوتند: یک متخصص L6 ممکن است بسیار بیشتر از یک tech lead سطح L5 کد بزنند. آنچه باید دید جهت حرکت است، نه خانه‌ی دقیق.")));
-      h += U.section("habits", L("Three habits that never leave the ladder", "سه عادتی که هرگز از نردبان کنار نمی‌روند"),
+            "این تصویر از الگوهای معمول تغییر کار ساخته شده و بر نردبان‌های شغلی عمومی و نوشته‌های مهندسان staff تکیه دارد. نقش‌ها متفاوت‌اند. یک متخصص L6 ممکن است بسیار بیشتر از یک tech lead در L5 کد بنویسد. به روند تغییر توجه کنید، نه مقدار دقیق هر خانه.")));
+      h += U.section("habits", L("Three habits that never leave the ladder", "سه عادت مشترک در همه‌ی سطح‌ها"),
         L("They are expected at every level. What changes is how far they reach: from your desk to your team, to the whole organisation.",
-          "در هر سطحی انتظار می‌رود. آنچه عوض می‌شود دامنه‌ی اثرشان است: از میز کار شما به تیم، و از تیم به کل سازمان."),
+          "این عادت‌ها در هر سطحی لازم‌اند. آنچه تغییر می‌کند دامنه‌ی اثر آن‌هاست: از کار فردی شما به تیم و از تیم به کل سازمان."),
         habitsHtml());
-      h += U.nextCard("locate", S.pageLabel("locate"), L("A five-minute mirror across the four lenses.", "آینه‌ی پنج‌دقیقه‌ای روی چهار بُعد."));
+      h += U.nextCard("locate", S.pageLabel("locate"), L("A five-minute mirror across the four lenses.", "خودارزیابی پنج‌دقیقه‌ای بر اساس چهار بُعد."));
       root.innerHTML = h;
 
       function draw() {

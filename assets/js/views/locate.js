@@ -66,13 +66,13 @@
 
   /* ---- views of the flow ---- */
   function introHtml(st, res) {
-    var h = '<div class="card intro-card"><div class="intro-ic">' + icon("target") + "</div><div><h2>" + md(L("A five-minute mirror", "آینه‌ی پنج‌دقیقه‌ای")) + "</h2>" +
+    var h = '<div class="card intro-card"><div class="intro-ic">' + icon("target") + "</div><div><h2>" + md(L("A five-minute mirror", "خودارزیابی پنج‌دقیقه‌ای")) + "</h2>" +
       "<p>" + md(L("Fifteen short questions, three for each lens, then nine quick habit checks. Answer about the **last six to twelve months**, with one real example in mind for each answer.",
-        "پانزده پرسش کوتاه، سه تا برای هر بُعد، و بعد نه بررسی سریع عادت‌ها. درباره‌ی **شش تا دوازده ماه گذشته** پاسخ دهید و برای هر پاسخ یک مثال واقعی در ذهن داشته باشید.")) + "</p>" +
-      '<ul class="tick"><li>' + md(L("If you can't name a concrete example for an option, pick the one below it.", "اگر برای یک گزینه نمی‌توانید مثال مشخصی نام ببرید، گزینه‌ی پایین‌ترش را انتخاب کنید.")) + "</li><li>" +
-      md(L("It is a conversation starter, not a verdict. Nothing leaves your browser.", "آغازگر گفتگوست، نه حکم. هیچ‌چیز از مرورگر شما بیرون نمی‌رود.")) + "</li></ul>" +
-      '<div class="btn-row"><button type="button" class="btn" data-go="0">' + icon("play") + md(st.step > 0 && res.answered ? L("Continue", "ادامه") : L("Start the mirror", "شروع آینه")) + "</button>";
-    if (res.answered >= res.total) h += '<button type="button" class="btn secondary" data-go="6">' + icon("eye") + md(L("See my last result", "دیدن آخرین نتیجه")) + "</button>";
+        "پانزده پرسش کوتاه، سه پرسش برای هر بُعد، و سپس نه مورد برای بررسی عادت‌ها. بر اساس **شش تا دوازده ماه گذشته** پاسخ دهید و برای هر پاسخ، نمونه‌ای واقعی در ذهن داشته باشید.")) + "</p>" +
+      '<ul class="tick"><li>' + md(L("If you can't name a concrete example for an option, pick the one below it.", "اگر برای گزینه‌ای نمونه‌ی مشخصی ندارید، گزینه‌ی پایین‌تر را انتخاب کنید.")) + "</li><li>" +
+      md(L("It is a conversation starter, not a verdict. Nothing leaves your browser.", "نتیجه، مبنای شروع گفتگوست و حکم قطعی نیست. هیچ اطلاعاتی از مرورگر شما خارج نمی‌شود.")) + "</li></ul>" +
+      '<div class="btn-row"><button type="button" class="btn" data-go="0">' + icon("play") + md(st.step > 0 && res.answered ? L("Continue", "ادامه") : L("Start the mirror", "شروع خودارزیابی")) + "</button>";
+    if (res.answered >= res.total) h += '<button type="button" class="btn secondary" data-go="6">' + icon("eye") + md(L("See my last result", "مشاهده‌ی آخرین نتیجه")) + "</button>";
     if (res.answered) h += '<button type="button" class="btn ghost" data-reset="1">' + icon("reset") + esc(U.u("reset")) + "</button>";
     return h + "</div></div></div>";
   }
@@ -113,8 +113,8 @@
   function habitsStepHtml(st) {
     var A = S.data.assess, items = A.habits || [];
     var done = items.every(function (x) { return st.hb[x.id] != null; });
-    var h = stepsBar(5) + '<div class="lens-step"><div class="lens-step-h">' + icon("gear") + "<div><h2>" + md(L("Habits that never leave the ladder", "عادت‌هایی که هرگز از نردبان کنار نمی‌روند")) + "</h2><p class=\"muted\">" +
-      md(L("These apply at every level. Be honest: a gap here can block a case even when everything else is strong.", "این‌ها در هر سطحی لازم‌اند. صادق باشید: شکاف اینجا می‌تواند پرونده را متوقف کند، حتی وقتی بقیه‌چیز قوی است.")) + "</p></div></div>";
+    var h = stepsBar(5) + '<div class="lens-step"><div class="lens-step-h">' + icon("gear") + "<div><h2>" + md(L("Habits that never leave the ladder", "عادت‌های مشترک در همه‌ی سطح‌ها")) + "</h2><p class=\"muted\">" +
+      md(L("These apply at every level. Be honest: a gap here can block a case even when everything else is strong.", "این عادت‌ها در هر سطحی لازم‌اند. صادقانه پاسخ دهید. ضعف در این بخش می‌تواند مانع ارتقا شود، حتی اگر عملکردتان در بقیه‌ی بخش‌ها قوی باشد.")) + "</p></div></div>";
     HABITS.forEach(function (hb) {
       h += '<div class="habit-block"><h3>' + icon(hb.icon) + " " + md(hb.name) + "</h3>";
       items.filter(function (x) { return x.habit === hb.id; }).forEach(function (x) {
@@ -140,7 +140,7 @@
   function summaryText(st, res) {
     var lines = [];
     lines.push(S.plain(L("Where I am: self-assessment", "من کجا هستم: خودارزیابی")));
-    lines.push(S.plain(L("My work reads mostly at ", "کار من بیشتر در سطح ")) + lvLabel(res.overall) + " (" + U.levelName(lvCode(res.overall)) + ")" + (S.isFa() ? " خوانده می‌شود" : ""));
+    lines.push(S.plain(L("My work reads mostly at ", "کار من بیشتر در سطح ")) + lvLabel(res.overall) + " (" + U.levelName(lvCode(res.overall)) + ")" + (S.isFa() ? " ارزیابی می‌شود" : ""));
     lines.push("");
     LENS_ORDER.forEach(function (l) {
       var x = res.lenses[l];
@@ -148,7 +148,7 @@
     });
     if (res.weakest) {
       lines.push("");
-      lines.push(S.plain(L("Growth edge: ", "لبه‌ی رشد: ")) + lensName(res.weakest) + " (" + lvLabel(res.lenses[res.weakest].level) + ")");
+      lines.push(S.plain(L("Growth edge: ", "اولویت رشد: ")) + lensName(res.weakest) + " (" + lvLabel(res.lenses[res.weakest].level) + ")");
       var g = growFor(res.weakest, res.lenses[res.weakest].level);
       if (g && g.ask) {
         lines.push("");
@@ -165,44 +165,44 @@
     var refLvl = cmp || overallLvl;
     var vals = LENS_ORDER.map(function (l) { return res.lenses[l].mean; });
     var axes = LENS_ORDER.map(function (l) { return lensName(l); });
-    h += '<div class="result-head"><span class="tag brand">' + icon("target") + esc(S.plain(L("Your mirror", "آینه‌ی شما"))) + "</span><h2>" + md(L("Your work reads mostly at", "کار شما بیشتر در این سطح خوانده می‌شود:")) + " " + lvChip(overallLvl) + " " +
+    h += '<div class="result-head"><span class="tag brand">' + icon("target") + esc(S.plain(L("Your mirror", "نتیجه‌ی خودارزیابی شما"))) + "</span><h2>" + md(L("Your work reads mostly at", "کار شما بیشتر با این سطح مطابقت دارد:")) + " " + lvChip(overallLvl) + " " +
       md(overallLvl <= 3 ? L("Learn–Deliver", "یادگیری–تحویل") : S.levelById("L" + overallLvl).name) + "</h2></div>";
 
-    h += '<div class="res-grid"><div class="card res-chart"><h3 class="h-sm">' + md(L("Profile across the lenses", "پروفایل در بُعدها")) + "</h3>" +
+    h += '<div class="res-grid"><div class="card res-chart"><h3 class="h-sm">' + md(L("Profile across the lenses", "پروفایل عملکرد در بُعدهای ارزیابی")) + "</h3>" +
       U.radar({ axes: axes, min: 2, max: 7, rings: [3, 4, 5, 6, 7], ringLabel: function (v) { return v === 3 ? "L2–3" : "L" + v; },
-        aria: S.plain(L("Radar chart of your five lens scores against a reference level", "نمودار راداری امتیاز پنج بُعد شما در برابر یک سطح مرجع")),
+        aria: S.plain(L("Radar chart of your five lens scores against a reference level", "نمودار راداری امتیاز شما در پنج بُعد، در مقایسه با یک سطح مرجع")),
         valueLabel: function (v) { return S.digits(v.toFixed(1)); },
         series: [{ name: "me", values: vals, cls: "a" }, { name: "ref", values: LENS_ORDER.map(function () { return refLvl; }), cls: "b", noDots: true }] }) +
       '<div class="cmp"><span class="muted">' + md(L("Compare with", "مقایسه با")) + "</span>" +
       U.seg("cmp", [3, 4, 5, 6, 7].map(function (n) { return { id: String(n), label: n === 3 ? "L2–3" : "L" + n }; }), String(refLvl)) + "</div>" +
-      '<p class="legend"><span class="key-a"></span>' + md(L("you", "شما")) + ' <span class="key-b"></span>' + md(L("the level you compare with", "سطحی که مقایسه می‌کنید")) + "</p></div>";
+      '<p class="legend"><span class="key-a"></span>' + md(L("you", "شما")) + ' <span class="key-b"></span>' + md(L("the level you compare with", "سطح مرجع مقایسه")) + "</p></div>";
 
     h += '<div class="card res-lenses"><h3 class="h-sm">' + md(L("Lens by lens", "بُعد به بُعد")) + "</h3>" + LENS_ORDER.map(function (l) {
       var x = res.lenses[l], isEdge = l === res.weakest, isTop = l === res.strongest && res.spread > 0.5;
       return '<div class="lrow' + (isEdge ? " edge" : "") + '"><div class="lrow-h">' + icon(S.lensById(l).icon) + "<strong>" + md(S.lensById(l).name) + "</strong>" + lvChip(x.level) +
-        (isEdge && res.spread > 0.5 ? '<span class="tag warn">' + md(L("growth edge", "لبه‌ی رشد")) + "</span>" : "") + (isTop ? '<span class="tag good">' + md(L("strongest", "قوی‌ترین")) + "</span>" : "") + "</div>" +
+        (isEdge && res.spread > 0.5 ? '<span class="tag warn">' + md(L("growth edge", "اولویت رشد")) + "</span>" : "") + (isTop ? '<span class="tag good">' + md(L("strongest", "قوی‌ترین بُعد")) + "</span>" : "") + "</div>" +
         U.meter(x.mean - 2, 5, isEdge ? "warn" : "") + "</div>";
     }).join("") + "</div></div>";
 
     // narrative
     var story;
-    if (res.spread <= 0.75) story = L("A balanced profile: all five lenses sit within a few tenths of a level of each other. That is the pattern panels like to see.", "پروفایلی متعادل: هر پنج بُعد در فاصله‌ی چند دهم سطح از هم‌اند. پنل‌ها دوست دارند همین الگو را ببینند.");
+    if (res.spread <= 0.75) story = L("A balanced profile: all five lenses sit within a few tenths of a level of each other. That is the pattern panels like to see.", "پروفایلی متعادل: فاصله‌ی هر پنج بُعد با یکدیگر، فقط چند دهم سطح است. کمیته‌های ارزیابی معمولا چنین الگوی یکدستی را ترجیح می‌دهند.");
     else story = L("A profile with a shape: " + lensName(res.strongest) + " reads at " + lvLabel(res.lenses[res.strongest].level) + " while " + lensName(res.weakest) + " reads at " + lvLabel(res.lenses[res.weakest].level) + ". Panels usually want a consistent pattern, and one dominant gap can block a case. That gap is also your fastest lever.",
-      "پروفایلی با شکل مشخص: " + lensName(res.strongest) + " در سطح " + lvLabel(res.lenses[res.strongest].level) + " و " + lensName(res.weakest) + " در سطح " + lvLabel(res.lenses[res.weakest].level) + " خوانده می‌شود. پنل‌ها معمولا الگوی یکدست می‌خواهند و یک شکاف غالب می‌تواند پرونده را متوقف کند. همین شکاف سریع‌ترین اهرم شماست.");
+      "پروفایلی با تفاوت میان بُعدها: " + lensName(res.strongest) + " در سطح " + lvLabel(res.lenses[res.strongest].level) + " و " + lensName(res.weakest) + " در سطح " + lvLabel(res.lenses[res.weakest].level) + " ارزیابی می‌شود. کمیته‌ها معمولا عملکردی یکدست می‌خواهند. ضعف چشمگیر در یک بُعد می‌تواند مانع ارتقا شود. تمرکز بر همین بُعد، سریع‌ترین راه بهبود عملکرد شماست.");
     h += U.callout(res.spread <= 0.75 ? "good" : "rule", null, story);
 
     // growth edge
     if (res.weakest) {
       var wl = res.weakest, wlev = res.lenses[wl].level, lensObj = S.lensById(wl);
       var nextLvl = S.levelById("L" + Math.min(wlev + 1, 7)), g = growFor(wl, wlev);
-      h += '<div class="card edge-card"><div class="edge-h"><span class="tag warn">' + icon("flag") + md(L("Your growth edge", "لبه‌ی رشد شما")) + "</span><h3>" + md(lensObj.name) + " " + lvChip(wlev) + "</h3></div>";
-      if (lensObj.id !== "impact" && nextLvl && nextLvl.shift) h += '<p class="edge-shift"><span class="h-sm">' + md(L("The step this lens takes next", "گامی که این بُعد در ادامه برمی‌دارد")) + "</span>" + S.lv(nextLvl.id) + " " + md(nextLvl.shift[wl]) + "</p>";
+      h += '<div class="card edge-card"><div class="edge-h"><span class="tag warn">' + icon("flag") + md(L("Your growth edge", "اولویت رشد شما")) + "</span><h3>" + md(lensObj.name) + " " + lvChip(wlev) + "</h3></div>";
+      if (lensObj.id !== "impact" && nextLvl && nextLvl.shift) h += '<p class="edge-shift"><span class="h-sm">' + md(L("The step this lens takes next", "انتظار سطح بعد در این بُعد")) + "</span>" + S.lv(nextLvl.id) + " " + md(nextLvl.shift[wl]) + "</p>";
       else if (nextLvl) h += '<p class="edge-shift"><span class="h-sm">' + md(L("What impact looks like at the next level", "اثرگذاری در سطح بعد چه شکلی است")) + "</span>" + S.lv(nextLvl.id) + " " + md(nextLvl.lenses.impact[0]) + "</p>";
       if (g && wl !== "impact" && g.moves && g.moves[wl]) {
-        h += '<div class="grid c2"><div><h4 class="h-sm">' + md(L("Three moves for this quarter", "سه حرکت برای این فصل")) + '</h4><ul class="tick">' + g.moves[wl].map(function (m) { return "<li>" + md(m) + "</li>"; }).join("") + "</ul></div>" +
+        h += '<div class="grid c2"><div><h4 class="h-sm">' + md(L("Three moves for this quarter", "سه اقدام برای این فصل")) + '</h4><ul class="tick">' + g.moves[wl].map(function (m) { return "<li>" + md(m) + "</li>"; }).join("") + "</ul></div>" +
           "<div><h4 class=\"h-sm\">" + md(L("Questions for your manager", "پرسش‌هایی برای مدیرتان")) + '</h4><ul class="tick">' + (g.ask || []).map(function (m) { return "<li>" + md(m) + "</li>"; }).join("") + "</ul></div></div>";
       } else if (g && g.evidence) {
-        h += '<h4 class="h-sm">' + md(L("How a panel could quote it", "پنل چطور می‌تواند نقلش کند")) + '</h4><ul class="tick">' + g.evidence.slice(0, 3).map(function (m) { return "<li>" + md(m) + "</li>"; }).join("") + "</ul>";
+        h += '<h4 class="h-sm">' + md(L("How a panel could quote it", "کمیته چطور می‌تواند به آن استناد کند")) + '</h4><ul class="tick">' + g.evidence.slice(0, 3).map(function (m) { return "<li>" + md(m) + "</li>"; }).join("") + "</ul>";
       }
       h += '<div class="btn-row"><a class="btn sm" href="#/grow/playbooks" data-grow-from="' + lvCode(S.clamp(wlev, 3, 6)) + '">' + icon("trend") + md(L("Open the full playbook", "نقشه‌ی راه کامل")) + "</a></div></div>";
     }
@@ -211,15 +211,15 @@
     h += '<div class="card"><h3 class="h-sm">' + md(L("Habits", "عادت‌ها")) + '</h3><div class="grid c3">' + HABITS.map(function (hb) {
       var x = res.habits[hb.id], pct = x.max ? x.sum / x.max : 0;
       return '<div class="hab"><div class="hab-h">' + icon(hb.icon) + "<strong>" + md(hb.name) + "</strong></div>" + U.meter(x.sum, x.max || 1, pct < 0.5 ? "warn" : "") +
-        "<p>" + md(pct >= 0.75 ? L("Solid.", "محکم.") : pct >= 0.5 ? L("Mostly there. Pick one habit to make consistent.", "تقریبا. یک عادت را انتخاب کنید و پیوسته‌اش کنید.") : L("Worth a look. Gaps here can hold a case back.", "ارزش بررسی دارد. شکاف اینجا می‌تواند پرونده را عقب نگه دارد.")) + "</p></div>";
+        "<p>" + md(pct >= 0.75 ? L("Solid.", "عملکرد قابل‌اتکا.") : pct >= 0.5 ? L("Mostly there. Pick one habit to make consistent.", "بیشتر موارد مناسب است. یک عادت را انتخاب کنید و در انجام آن استمرار داشته باشید.") : L("Worth a look. Gaps here can hold a case back.", "به بررسی نیاز دارد. ضعف در این بخش می‌تواند مانع پیشرفت پرونده‌ی ارتقا شود.")) + "</p></div>";
     }).join("") + "</div></div>";
 
     // summary
     h += '<div class="card"><h3>' + icon("copy") + " " + md(L("Take it to your next 1:1", "به 1:1 بعدی ببرید")) + '</h3><textarea id="summaryText" readonly rows="10">' + esc(summaryText(st, res)) + "</textarea>" +
       '<div class="btn-row"><button type="button" class="btn sm" data-copy-target="#summaryText">' + icon("copy") + esc(U.u("copySummary")) + '</button><button type="button" class="btn secondary sm no-print" data-print="1">' + icon("print") + esc(U.u("print")) + "</button>" +
-      (S.state.me !== lvCode(Math.max(overallLvl, 3)) ? '<button type="button" class="btn secondary sm" data-setme="' + lvCode(Math.max(overallLvl, 3)) + '">' + icon("user") + md(L("Use ", "استفاده از ")) + lvLabel(overallLvl) + md(L(" as my level", " به‌عنوان سطح من")) + "</button>" : "") +
+      (S.state.me !== lvCode(Math.max(overallLvl, 3)) ? '<button type="button" class="btn secondary sm" data-setme="' + lvCode(Math.max(overallLvl, 3)) + '">' + icon("user") + md(L("Use ", "انتخاب ")) + lvLabel(overallLvl) + md(L(" as my level", " به‌عنوان سطح من")) + "</button>" : "") +
       '<button type="button" class="btn ghost sm" data-reset="1">' + icon("reset") + esc(U.u("reset")) + "</button></div></div>";
-    h += U.callout("note", L("A mirror, not a verdict", "آینه است، نه حکم"), L("Your reading is only as good as the examples behind your answers. Take it to your manager, ask where they see it differently, and look at the [level descriptions](#/levels) for the places you disagree.", "نتیجه فقط به اندازه‌ی مثال‌هایی معتبر است که پشت پاسخ‌هایتان هست. آن را نزد مدیرتان ببرید، بپرسید کجا متفاوت می‌بیند و برای جاهایی که اختلاف دارید [شرح سطح‌ها](#/levels) را ببینید."));
+    h += U.callout("note", L("A mirror, not a verdict", "خودارزیابی، مبنای گفتگوست"), L("Your reading is only as good as the examples behind your answers. Take it to your manager, ask where they see it differently, and look at the [level descriptions](#/levels) for the places you disagree.", "اعتبار نتیجه به نمونه‌هایی بستگی دارد که پشت پاسخ‌هایتان قرار دارند. آن را با مدیرتان مرور کنید و بپرسید برداشت او در کدام بخش متفاوت است. برای بررسی اختلاف‌ها، [شرح سطح‌ها](#/levels) را ببینید."));
     return h;
   }
 
@@ -231,11 +231,11 @@
         route: "locate", kicker: L("Locate & grow", "جایگاه و رشد"), icon: "target",
         title: L("Where am I?", "من کجا هستم؟"),
         lead: L("Fifteen questions across the four lenses and impact, then a profile you can take to your next 1:1. The honest version of a self-review.",
-                "پانزده پرسش درباره‌ی چهار بُعد و اثرگذاری، و بعد یک پروفایل که می‌توانید به 1:1 بعدی ببرید. نسخه‌ی صادقانه‌ی یک خودارزیابی."),
+                "پانزده پرسش درباره‌ی چهار بُعد و اثرگذاری، همراه با پروفایلی که می‌توانید به جلسه‌ی 1:1 بعدی ببرید. ابزاری برای خودارزیابی صادقانه."),
         tldr: [
-          L("Answer about the last 6–12 months and keep one real example in mind for each answer.", "درباره‌ی ۶ تا ۱۲ ماه گذشته پاسخ دهید و برای هر پاسخ یک مثال واقعی در ذهن داشته باشید."),
-          L("The result is a profile, not a single number: a spiky profile tells you more than an average.", "نتیجه یک پروفایل است، نه یک عدد: پروفایل نوک‌دار بیشتر از میانگین به شما می‌گوید."),
-          L("The weakest lens is your growth edge. The result gives you moves and questions for your manager.", "ضعیف‌ترین بُعد لبه‌ی رشد شماست. نتیجه برایتان حرکت‌ها و پرسش‌هایی برای مدیرتان می‌دهد.")
+          L("Answer about the last 6–12 months and keep one real example in mind for each answer.", "بر اساس 6 تا 12 ماه گذشته پاسخ دهید و برای هر پاسخ، نمونه‌ای واقعی در ذهن داشته باشید."),
+          L("The result is a profile, not a single number: a spiky profile tells you more than an average.", "نتیجه، یک پروفایل است و به یک عدد محدود نمی‌شود. تفاوت میان بُعدها اطلاعات بیشتری از میانگین به شما می‌دهد."),
+          L("The weakest lens is your growth edge. The result gives you moves and questions for your manager.", "ضعیف‌ترین بُعد، اولویت رشد شماست. در نتیجه‌ی ارزیابی، اقدام‌های پیشنهادی و پرسش‌هایی برای گفتگو با مدیرتان می‌بینید.")
         ]
       });
       root.innerHTML = head + '<div id="mirror" class="mirror"></div>';
@@ -283,7 +283,7 @@
       draw(true);
     },
     search: function () {
-      return [{ kind: L("Tool", "ابزار"), title: L("Where am I? Self-assessment", "من کجا هستم؟ خودارزیابی"), text: L("Fifteen questions, a radar profile across the lenses, your growth edge and a 1:1 summary.", "پانزده پرسش، یک پروفایل راداری، لبه‌ی رشد و خلاصه‌ی 1:1."), route: "locate" }];
+      return [{ kind: L("Tool", "ابزار"), title: L("Where am I? Self-assessment", "من کجا هستم؟ خودارزیابی"), text: L("Fifteen questions, a radar profile across the lenses, your growth edge and a 1:1 summary.", "پانزده پرسش، پروفایل راداری، اولویت رشد و خلاصه‌ی قابل‌استفاده در 1:1."), route: "locate" }];
     }
   };
 })();

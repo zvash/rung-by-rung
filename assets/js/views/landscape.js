@@ -36,13 +36,13 @@
       return ["<strong>" + esc(e.name) + "</strong>", '<span class="nowrap">' + md(e.d) + "</span>", md(e.x), U.confTag(e.conf) + (e.rep ? '<br><span class="tag sm-tag">' + md(L("press account", "گزارش رسانه‌ای")) + "</span>" : "")];
     });
     var h = '<h3>' + md(L("What employers said", "کارفرماها چه گفتند")) + "</h3>" + U.table(head, rows, { cls: "emp-table" });
-    h += U.callout("warn", L("Read this table with its dates", "این جدول را با تاریخ‌هایش بخوانید"), D.pattern);
+    h += U.callout("warn", L("Read this table with its dates", "این جدول را همراه با تاریخ هر مورد بخوانید"), D.pattern);
     h += U.callout("rule", L("Our reading", "برداشت ما"), D.synthesis);
     h += '<h3 class="sp">' + md(L("What the evidence says", "شواهد چه می‌گویند")) + "</h3>";
-    h += '<div class="grid c2"><div class="card"><h4 class="h-sm good">' + icon("check") + " " + md(L("Solid: several independent sources", "محکم: چند منبع مستقل")) + '</h4><ul class="tick">' + D.solid.map(function (x) { return "<li>" + md(x) + "</li>"; }).join("") + "</ul></div>" +
+    h += '<div class="grid c2"><div class="card"><h4 class="h-sm good">' + icon("check") + " " + md(L("Solid: several independent sources", "شواهد قوی: چند منبع مستقل")) + '</h4><ul class="tick">' + D.solid.map(function (x) { return "<li>" + md(x) + "</li>"; }).join("") + "</ul></div>" +
       '<div class="card"><h4 class="h-sm bad">' + icon("alert") + " " + md(L("Contested", "محل بحث")) + '</h4><ul class="cross">' + D.contested.map(function (x) { return "<li>" + md(x) + "</li>"; }).join("") + "</ul></div></div>";
     h += '<div class="grid c2 sp ev-cards">' + D.evidence.map(function (e) {
-      return '<div class="card ev-card"><div class="ev-card-h"><h3>' + md(e.t) + '</h3></div><div class="ev-card-m"><span class="tag" dir="ltr">' + esc(S.digits(e.d)) + "</span>" + U.confTag(e.conf) + "</div><p>" + md(e.x) + '</p><p class="ev-caveat">' + icon("alert") + "<span><strong>" + md(L("Caveat: ", "نکته‌ی احتیاط: ")) + "</strong>" + md(e.c) + "</span></p></div>";
+      return '<div class="card ev-card"><div class="ev-card-h"><h3>' + md(e.t) + '</h3></div><div class="ev-card-m"><span class="tag" dir="ltr">' + esc(S.digits(e.d)) + "</span>" + U.confTag(e.conf) + "</div><p>" + md(e.x) + '</p><p class="ev-caveat">' + icon("alert") + "<span><strong>" + md(L("Caveat: ", "محدودیت شواهد: ")) + "</strong>" + md(e.c) + "</span></p></div>";
     }).join("") + "</div>";
     return h;
   }
@@ -51,37 +51,37 @@
   function marketSection() {
     var M = D.market, p = pct();
     var h = '<div class="grid c2">' + M.entry.map(function (e) {
-      return '<div class="card"><div class="ev-card-m"><h3>' + md(e.t) + "</h3></div>" + '<div class="ev-card-m">' + U.confTag(e.conf) + "</div><p>" + md(e.x) + '</p><p class="ev-caveat">' + icon("alert") + "<span><strong>" + md(L("Caveat: ", "نکته‌ی احتیاط: ")) + "</strong>" + md(e.c) + "</span></p></div>";
+      return '<div class="card"><div class="ev-card-m"><h3>' + md(e.t) + "</h3></div>" + '<div class="ev-card-m">' + U.confTag(e.conf) + "</div><p>" + md(e.x) + '</p><p class="ev-caveat">' + icon("alert") + "<span><strong>" + md(L("Caveat: ", "محدودیت شواهد: ")) + "</strong>" + md(e.c) + "</span></p></div>";
     }).join("") + "</div>";
     // postings
     h += '<div class="grid c2 sp"><div class="card"><h4 class="h-sm">' + md(L("Software-development postings (Indeed), February 2020 = 100", "آگهی‌های توسعه‌ی نرم‌افزار (Indeed)، فوریه‌ی 2020 = 100")) + "</h4>" +
       U.bars(M.postings.map(function (r) { return { label: md(r.label), value: r.v, max: 100, text: S.digits(r.v % 1 ? r.v.toFixed(1) : r.v) }; })) +
-      '<p class="subtle sm">' + md(L("About 23% below pre-pandemic after a partial rebound. Postings are not hires. The April figure comes from a secondary source.", "حدود 23% زیر سطح پیش از همه‌گیری، بعد از یک بازگشت نسبی. آگهی یعنی استخدام نیست. عدد آوریل از منبع دست‌دوم است.")) + "</p></div>";
+      '<p class="subtle sm">' + md(L("About 23% below pre-pandemic after a partial rebound. Postings are not hires. The April figure comes from a secondary source.", "حدود 23% پایین‌تر از سطح پیش از همه‌گیری، پس از بهبود نسبی. تعداد آگهی‌ها معادل تعداد استخدام‌ها نیست. عدد آوریل از منبع ثانویه گرفته شده است.")) + "</p></div>";
     // layoffs
-    h += '<div class="card"><h4 class="h-sm">' + md(L("The same year, three layoff counts", "یک سال، سه شمارش تعدیل")) + "</h4>" +
+    h += '<div class="card"><h4 class="h-sm">' + md(L("The same year, three layoff counts", "یک سال، سه برآورد از تعدیل نیرو")) + "</h4>" +
       U.bars(M.layoffs.map(function (r) { return { label: md(r.label), value: r.v, max: 200000, text: S.digits(r.v.toLocaleString("en-US")), cls: "amber" }; })) +
-      '<p class="subtle sm">' + md(L("2026 so far. Trackers count different events over different windows, so never quote a bare total: name the tracker.", "2026 تا اینجا. ردیاب‌ها رویدادهای متفاوتی را در بازه‌های متفاوت می‌شمارند؛ پس هرگز یک عدد برهنه نقل نکنید: ردیاب را نام ببرید.")) + "</p></div></div>";
+      '<p class="subtle sm">' + md(L("2026 so far. Trackers count different events over different windows, so never quote a bare total: name the tracker.", "از ابتدای 2026 تا امروز. سایت‌های ردیابی رویدادهای متفاوتی را در بازه‌های متفاوت می‌شمارند. عدد را بدون ذکر منبع نقل نکنید و نام سایت ردیابی را هم بیاورید.")) + "</p></div></div>";
     // headcount
     h += '<div class="card sp"><h4 class="h-sm">' + md(L("Headcount change over two years to May 2026", "تغییر تعداد کارکنان در دو سال تا مه 2026")) + "</h4>" +
       U.bars(M.headcount.map(function (r) {
         var sign = r.v >= 0 ? "+" : "−";
         return { label: esc(r.name || r.label) + (r.note ? '<br><span class="subtle sm">' + md(r.note) + "</span>" : ""), value: Math.abs(r.v), max: 40, text: '<span dir="ltr">' + sign + S.digits(Math.abs(r.v)) + p + "</span>", cls: r.v >= 0 ? "" : "neg" };
       })) +
-      '<p class="subtle sm">' + md(L("Top tech employers and fast growers, from TrueUp, Workforce.ai and Indeed data as reported by Pragmatic Engineer (26 May 2026). Software postings are up in the US and UK and down in Germany and France.", "شرکت‌های بزرگ فناوری و رشدکننده‌های سریع، از داده‌های TrueUp، Workforce.ai و Indeed به نقل از Pragmatic Engineer (26 مه 2026). آگهی‌های نرم‌افزار در آمریکا و بریتانیا بیشتر و در آلمان و فرانسه کمتر شده.")) + "</p></div>";
-    h += '<h3 class="sp">' + md(L("Flatter organisations, tighter reviews", "سازمان‌های تخت‌تر، ارزیابی‌های سخت‌گیرانه‌تر")) + '</h3><ul class="tick">' + M.flattening.map(function (x) { return "<li>" + md(x) + "</li>"; }).join("") + "</ul>";
+      '<p class="subtle sm">' + md(L("Top tech employers and fast growers, from TrueUp, Workforce.ai and Indeed data as reported by Pragmatic Engineer (26 May 2026). Software postings are up in the US and UK and down in Germany and France.", "شرکت‌های بزرگ فناوری و شرکت‌های با رشد سریع، بر اساس داده‌های TrueUp، Workforce.ai و Indeed به نقل از Pragmatic Engineer (26 مه 2026). آگهی‌های شغلی نرم‌افزار در آمریکا و بریتانیا افزایش و در آلمان و فرانسه کاهش یافته‌اند.")) + "</p></div>";
+    h += '<h3 class="sp">' + md(L("Flatter organisations, tighter reviews", "سازمان‌هایی با لایه‌های مدیریتی کمتر، ارزیابی‌های سخت‌گیرانه‌تر")) + '</h3><ul class="tick">' + M.flattening.map(function (x) { return "<li>" + md(x) + "</li>"; }).join("") + "</ul>";
     h += U.callout("note", null, M.noLevelChange) + U.callout("warn", L("Causality", "علّیت"), M.causality);
     return h;
   }
 
   /* ---------------- by level ---------------- */
   function byLevelSection() {
-    var head = [md(L("Level", "سطح")), md(L("Being commoditised", "در حال کالا شدن")), md(L("Becoming more valuable", "ارزشمندتر شدن")), md(L("How solid is it", "چقدر محکم است"))];
+    var head = [md(L("Level", "سطح")), md(L("Being commoditised", "مهارت‌هایی که مزیت رقابتی کمتری دارند")), md(L("Becoming more valuable", "مهارت‌هایی که ارزشمندتر می‌شوند")), md(L("How solid is it", "میزان اتکاپذیری شواهد"))];
     var rows = D.byLevel.map(function (r) {
       return [r.lv.map(function (l) { return S.lv(l); }).join(" ") + " " + md(r.name), md(r.out), md(r.up), supTag(r.sup) + '<p class="subtle sm tbl-note">' + md(r.note) + "</p>"];
     });
     return U.table(head, rows, { cls: "bylevel-table" }) +
       '<p class="legend">' + supTag("C") + " " + md(L("three or more independent sources", "سه منبع مستقل یا بیشتر")) + " " + supTag("S") + " " + md(L("one author or source", "یک نویسنده یا منبع")) + " " + supTag("I") + " " + md(L("our own inference", "استنباط خودمان")) + "</p>" +
-      U.source(L("Levels follow this guide's scale: L2–L3 entry, L4 mid, L5 senior, L6–L7 staff and above. What follows from the evidence, and what is inference, is marked in the last column.", "سطح‌ها از مقیاس این راهنما پیروی می‌کنند: L2 و L3 ورودی، L4 میانی، L5 ارشد، L6 و L7 staff و بالاتر. آنچه از شواهد می‌آید و آنچه استنباط است در ستون آخر مشخص شده."));
+      U.source(L("Levels follow this guide's scale: L2–L3 entry, L4 mid, L5 senior, L6–L7 staff and above. What follows from the evidence, and what is inference, is marked in the last column.", "سطح‌ها بر اساس مقیاس این راهنما هستند: L2 و L3 ورودی، L4 میانی، L5 ارشد و L6 و L7، staff و بالاتر. ستون آخر مشخص می‌کند کدام نتیجه بر شواهد تکیه دارد و کدام استنباط ماست."));
   }
 
   /* ---------------- durable ---------------- */
@@ -97,11 +97,11 @@
         route: "landscape", kicker: L("Reference", "مرجع"), icon: "globe",
         title: L("The landscape in 2026", "چشم‌انداز 2026"),
         lead: L("What is changing around the ladder: AI expectations, the evidence on productivity, and the job market. Dated, sourced and hedged, because it moves fast.",
-                "آنچه دور نردبان در حال تغییر است: انتظارهای مربوط به AI، شواهد بهره‌وری و بازار کار. تاریخ‌دار، منبع‌دار و محتاطانه، چون سریع جابه‌جا می‌شود."),
+                "تحولات پیرامون نردبان: انتظارات مربوط به AI، شواهد بهره‌وری و بازار کار. تاریخ و منبع هر مطلب مشخص است و ادعاها با احتیاط بیان شده‌اند، چون شرایط به‌سرعت تغییر می‌کند."),
         tldr: [
-          L("Everything here is as of early October 2026. Policies have reversed within months, so treat any company's review rubric as a dated claim.", "همه‌چیز اینجا تا اوایل اکتبر 2026 است. سیاست‌ها ظرف چند ماه برگشته‌اند؛ پس rubric ارزیابی هر شرکت را ادعایی تاریخ‌دار بدانید."),
-          L("Evidence on AI and productivity is thin and mixed. What's solid: use is near-universal, trust is falling, and review becomes the bottleneck.", "شواهد درباره‌ی AI و بهره‌وری کم و ناهم‌سو است. آنچه محکم است: استفاده تقریبا همگانی است، اعتماد در حال کاهش است و review به گلوگاه تبدیل می‌شود."),
-          L("We found no published ladder rewritten because of AI. What shifts is the market around it, and which lenses are scarce.", "نردبان منتشرشده‌ای که به‌خاطر AI بازنویسی شده باشد پیدا نکردیم. آنچه جابه‌جا می‌شود بازار اطراف آن است و این‌که کدام بُعدها کمیاب‌اند.")
+          L("Everything here is as of early October 2026. Policies have reversed within months, so treat any company's review rubric as a dated claim.", "اطلاعات این صفحه مربوط به اوایل اکتبر 2026 است. بعضی سیاست‌ها ظرف چند ماه تغییر کرده‌اند. rubric ارزیابی هر شرکت را با توجه به تاریخ آن بخوانید."),
+          L("Evidence on AI and productivity is thin and mixed. What's solid: use is near-universal, trust is falling, and review becomes the bottleneck.", "شواهد بهره‌وری AI محدود و ناهمسو است. درباره‌ی سه موضوع شواهد قوی‌تری داریم: استفاده تقریبا فراگیر شده، اعتماد کاهش می‌یابد و review به گلوگاه تبدیل می‌شود."),
+          L("We found no published ladder rewritten because of AI. What shifts is the market around it, and which lenses are scarce.", "نردبان منتشرشده‌ای پیدا نکردیم که به دلیل AI بازنویسی شده باشد. تغییرات در بازار پیرامون آن و مهارت‌هایی که در هر بُعد کمیاب‌تر شده‌اند دیده می‌شوند.")
         ],
         sections: [
           { id: "timeline", label: L("Timeline", "خط زمان") },
@@ -111,13 +111,13 @@
           { id: "durable", label: L("Durable skills", "مهارت‌های پایدار") }
         ]
       });
-      h += U.callout("note", L("As of early October 2026", "تا اوایل اکتبر 2026"), L("Press reports of internal memos are marked, and two usage-based review criteria have already been walked back. Where we only saw a search summary of a source, the page says “reported”.", "گزارش‌های رسانه‌ای از یادداشت‌های داخلی مشخص شده‌اند و دو معیار ارزیابیِ مبتنی بر میزان استفاده همین حالا پس گرفته شده‌اند. جایی که فقط خلاصه‌ی جست‌وجوی یک منبع را دیدیم، صفحه می‌نویسد «گزارش‌شده»."));
-      h += U.section("timeline", L("A timeline, April 2025 to September 2026", "یک خط زمان، از آوریل 2025 تا سپتامبر 2026"), L("What was said, what was measured, and what happened in the market, in one list.", "آنچه گفته شد، آنچه اندازه گرفته شد و آنچه در بازار اتفاق افتاد، در یک فهرست."), timelineSection());
-      h += U.section("ai", L("AI: what employers said, and what the evidence says", "AI: کارفرماها چه گفتند و شواهد چه می‌گویند"), L("Expectations moved from “use it” to “show what changed”. The evidence behind the productivity claims is thinner than the headlines.", "انتظارها از «استفاده کن» به «نشان بده چه چیزی عوض شد» رفت. شواهد پشت ادعاهای بهره‌وری کم‌مایه‌تر از تیترهاست."), aiSection());
-      h += U.section("market", L("The job market", "بازار کار"), L("Entry-level hiring, postings, layoffs and the flattening of management, with the disagreements between sources left in.", "استخدام سطح ورودی، آگهی‌ها، تعدیل و تخت شدن مدیریت، با اختلاف میان منابع که عمدا نگه داشته شده."), marketSection());
-      h += U.section("bylevel", L("What it means at each level", "در هر سطح چه معنایی دارد"), L("Mostly inference, labelled as such. The direction is clearer than the size of any effect.", "بیشتر استنباط، با برچسب خودش. جهت از اندازه‌ی هر اثر روشن‌تر است."), byLevelSection());
-      h += U.section("durable", L("Skills that look durable", "مهارت‌هایی که پایدار به نظر می‌رسند"), L("Five things the evidence keeps pointing to, with one small thing to try for each.", "پنج چیز که شواهد مدام به آن‌ها اشاره می‌کند، با یک کار کوچک برای امتحان هرکدام."), durableSection());
-      h += U.nextCard("about", S.pageLabel("about"), L("Every source behind this page, with how much to trust it.", "هر منبع پشت این صفحه، با این‌که چقدر باید به آن اعتماد کرد."));
+      h += U.callout("note", L("As of early October 2026", "تا اوایل اکتبر 2026"), L("Press reports of internal memos are marked, and two usage-based review criteria have already been walked back. Where we only saw a search summary of a source, the page says “reported”.", "گزارش‌های رسانه‌ای درباره‌ی یادداشت‌های داخلی مشخص شده‌اند. دو معیار ارزیابی مبتنی بر میزان استفاده هم تا این زمان پس گرفته شده‌اند. هر جا فقط خلاصه‌ی جست‌وجوی منبع را دیده‌ایم، مطلب با برچسب «گزارش‌شده» آمده است."));
+      h += U.section("timeline", L("A timeline, April 2025 to September 2026", "یک خط زمان، از آوریل 2025 تا سپتامبر 2026"), L("What was said, what was measured, and what happened in the market, in one list.", "گفته‌ها، نتایج اندازه‌گیری و رویدادهای بازار، در یک فهرست."), timelineSection());
+      h += U.section("ai", L("AI: what employers said, and what the evidence says", "AI: کارفرماها چه گفتند و شواهد چه می‌گویند"), L("Expectations moved from “use it” to “show what changed”. The evidence behind the productivity claims is thinner than the headlines.", "انتظارها از «استفاده کن» به «نشان بده چه چیزی تغییر کرده» رسیده‌اند. شواهد ادعاهای بهره‌وری به اندازه‌ی تیترها قوی نیستند."), aiSection());
+      h += U.section("market", L("The job market", "بازار کار"), L("Entry-level hiring, postings, layoffs and the flattening of management, with the disagreements between sources left in.", "استخدام سطح ورودی، آگهی‌ها، تعدیل نیرو و کاهش لایه‌های مدیریت، همراه با اختلاف میان منابع."), marketSection());
+      h += U.section("bylevel", L("What it means at each level", "در هر سطح چه معنایی دارد"), L("Mostly inference, labelled as such. The direction is clearer than the size of any effect.", "بیشتر این نتایج استنباط‌اند و همین موضوع در برچسب‌ها مشخص شده است. جهت تغییر روشن‌تر از اندازه‌ی اثر آن است."), byLevelSection());
+      h += U.section("durable", L("Skills that look durable", "مهارت‌هایی که پایدار به نظر می‌رسند"), L("Five things the evidence keeps pointing to, with one small thing to try for each.", "پنج مهارت که شواهد مرتب به آن‌ها اشاره می‌کنند، همراه با یک اقدام کوچک برای تمرین هرکدام."), durableSection());
+      h += U.nextCard("about", S.pageLabel("about"), L("Every source behind this page, with how much to trust it.", "منابع این صفحه، همراه با میزان اتکاپذیری هرکدام."));
       root.innerHTML = h;
       S.on(root, "click", "[data-tl]", function (e, b) {
         var v = b.getAttribute("data-tl");
@@ -130,8 +130,8 @@
       var out = [
         { kind: L("Landscape", "چشم‌انداز"), title: L("Timeline: AI and the job market, 2025–26", "خط زمان: AI و بازار کار، 2025 و 2026"), text: L("Employer memos, studies and market data in date order.", "یادداشت‌های شرکت‌ها، مطالعه‌ها و داده‌های بازار به ترتیب تاریخ."), route: "landscape/timeline" },
         { kind: L("Landscape", "چشم‌انداز"), title: L("What employers said about AI use in reviews", "کارفرماها درباره‌ی استفاده از AI در ارزیابی چه گفتند"), text: D.synthesis, route: "landscape/ai" },
-        { kind: L("Landscape", "چشم‌انداز"), title: L("The job market: entry-level hiring, postings, layoffs", "بازار کار: استخدام سطح ورودی، آگهی‌ها، تعدیل"), text: D.market.noLevelChange, route: "landscape/market" },
-        { kind: L("Landscape", "چشم‌انداز"), title: L("What AI changes at each level", "AI در هر سطح چه چیزی را عوض می‌کند"), text: L("Entry, mid, senior and staff: what is commoditised and what becomes more valuable.", "ورودی، میانی، ارشد و staff: چه چیزی کالا می‌شود و چه چیزی ارزشمندتر."), route: "landscape/bylevel" },
+        { kind: L("Landscape", "چشم‌انداز"), title: L("The job market: entry-level hiring, postings, layoffs", "بازار کار: استخدام سطح ورودی، آگهی‌ها و تعدیل نیرو"), text: D.market.noLevelChange, route: "landscape/market" },
+        { kind: L("Landscape", "چشم‌انداز"), title: L("What AI changes at each level", "AI در هر سطح چه چیزی را عوض می‌کند"), text: L("Entry, mid, senior and staff: what is commoditised and what becomes more valuable.", "ورودی، میانی، ارشد و staff: کدام مهارت‌ها مزیت رقابتی کمتری دارند و کدام ارزشمندتر می‌شوند."), route: "landscape/bylevel" },
         { kind: L("Landscape", "چشم‌انداز"), title: L("Durable skills in the AI era", "مهارت‌های پایدار در دوران AI"), text: D.durableNote, route: "landscape/durable" }
       ];
       D.evidence.forEach(function (e) { out.push({ kind: L("Evidence", "شواهد"), title: e.t, text: e.x, route: "landscape/ai" }); });
